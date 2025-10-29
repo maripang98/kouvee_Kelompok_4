@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Layanan;
 
+
 class LayananController extends Controller
 {
     public function index()
@@ -72,4 +73,16 @@ class LayananController extends Controller
         $layanan->delete();
         return redirect()->route('layanan.index')->with('success', 'Layanan berhasil dihapus.');
     }
+
+    public function katalog(Request $request)
+{
+    $search = $request->input('search');
+
+    $layanans = Layanan::when($search, function ($query, $search) {
+        $query->where('NAMA_LAYANAN', 'like', "%{$search}%");
+    })->latest('ID_LAYANAN')->paginate(8);
+
+    return view('layanan.katalog', compact('layanans', 'search'));
+}
+
 }

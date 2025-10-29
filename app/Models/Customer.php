@@ -20,4 +20,9 @@ class Customer extends Model
         'TGL_LAHIR_CUSTOMER',
         'NOMOR_TELEPON_CUSTOMER',
     ];
+
+    public function hewan()
+{
+    return $this->hasMany(Hewan::class, 'ID_CUSTOMER', 'ID_CUSTOMER');
+}
 }

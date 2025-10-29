@@ -35,7 +35,7 @@
             <a class="nav-link {{ Request::is('customer*') ? 'active' : '' }}" href="{{ route('customer.index') }}">Customer</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ Request::is('layanan*') ? 'active' : '' }}" href="{{ route('layanan.index') }}">Layanan</a>
+            <a class="nav-link {{ Request::is('layanan*') ? 'active' : '' }}" href="{{ route('layanan.katalog') }}">Layanan</a>
           </li>
         </ul>
       </div>
