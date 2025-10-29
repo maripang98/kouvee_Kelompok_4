@@ -17,13 +17,9 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link {{ Request::is('owner/dashboard') ? 'active' : '' }}" href="{{ route('owner.dashboard') }}">Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link {{ Request::is('owner/produk*') ? 'active' : '' }}" href="{{ route('owner.produk.index') }}">Produk</a></li>
-          <li class="nav-item"><a class="nav-link {{ Request::is('owner/layanan*') ? 'active' : '' }}" href="{{ route('owner.layanan.index') }}">Layanan</a></li>
-          <li class="nav-item"><a class="nav-link {{ Request::is('owner/pegawai*') ? 'active' : '' }}" href="{{ route('owner.pegawai.index') }}">Pegawai</a></li>
         </ul>
       </div>
     </div>

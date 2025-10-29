@@ -21,8 +21,6 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link {{ Request::is('cs/dashboard') ? 'active' : '' }}" href="{{ route('cs.dashboard') }}">Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link {{ Request::is('cs/customer*') ? 'active' : '' }}" href="{{ route('cs.customer.index') }}">Customer</a></li>
-          <li class="nav-item"><a class="nav-link {{ Request::is('cs/hewan*') ? 'active' : '' }}" href="{{ route('cs.hewan.index') }}">Hewan</a></li>
         </ul>
       </div>
     </div>
@@ -66,7 +64,7 @@
             </thead>
             <tbody>
               @foreach ($customers as $c)
-                <tr><td>{{ $c->NAMA_CUSTOMER }}</td><td>{{ $c->NO_TELP_CUSTOMER ?? '-' }}</td></tr>
+                <tr><td>{{ $c->NAMA_CUSTOMER }}</td><td>{{ $c->NOMOR_TELEPON_CUSTOMER ?? '-' }}</td></tr>
               @endforeach
             </tbody>
           </table>

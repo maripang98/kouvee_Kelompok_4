@@ -25,7 +25,11 @@ class CustomerController extends Controller
             'NAMA_CUSTOMER' => 'required|string|max:100',
             'ALAMAT_CUSTOMER' => 'required|string|max:255',
             'TGL_LAHIR_CUSTOMER' => 'required|date',
-            'NOMOR_TELEPON_CUSTOMER' => 'required|string|max:20',
+            'NOMOR_TELEPON_CUSTOMER' => [
+            'required',
+            'digits_between:10,12', 
+            'regex:/^[0-9]+$/',     
+        ],
         ]);
 
         Customer::create($request->all());
@@ -44,7 +48,11 @@ class CustomerController extends Controller
             'NAMA_CUSTOMER' => 'required|string|max:100',
             'ALAMAT_CUSTOMER' => 'required|string|max:255',
             'TGL_LAHIR_CUSTOMER' => 'required|date',
-            'NOMOR_TELEPON_CUSTOMER' => 'required|string|max:20',
+            'NOMOR_TELEPON_CUSTOMER' => [
+            'required',
+            'digits_between:10,12', 
+            'regex:/^[0-9]+$/',     
+        ],
         ]);
 
         $customer->update($request->all());

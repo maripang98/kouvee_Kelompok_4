@@ -35,7 +35,7 @@
   </nav>
 
   <!-- HERO SECTION -->
-  <section class="hero-profile text-center text-white">
+  <section class="hero-profile">
     <div class="container">
       <h1 class="fw-bold">Tentang Kouvee Petshop</h1>
       <p>Memberikan perawatan terbaik untuk sahabat berbulu Anda 🐶🐱</p>
@@ -65,49 +65,51 @@
     </div>
   </section>
 
-  <!-- TEAM SECTION -->
-  <section class="team bg-light py-5">
+  <!-- VALUES SECTION -->
+  <section class="values bg-light py-5">
     <div class="container text-center">
-      <h2 class="fw-bold mb-4">Tim Kami</h2>
+      <h2 class="fw-bold mb-4">Nilai-Nilai Kouvee Petshop</h2>
+      <p class="mb-5 text-muted">
+        Kami berkomitmen memberikan pelayanan terbaik dengan hati, demi kebahagiaan hewan peliharaan Anda.
+      </p>
+
       <div class="row g-4">
-        <div class="col-md-4">
-          <div class="card border-0 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Owner">
+        <!-- Value 1 -->
+        <div class="col-md-4 col-sm-6">
+          <div class="card border-0 shadow-sm h-100">
+            <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=800&q=80" 
+     class="card-img-top" alt="Kasih Sayang dan Kepedulian">
             <div class="card-body">
-              <h5 class="fw-bold">Maria</h5>
-              <p>Owner & Grooming Specialist</p>
+              <h5 class="fw-bold">Kasih Sayang & Kepedulian</h5>
+              <p>Kami memperlakukan setiap hewan dengan penuh cinta, layaknya keluarga sendiri.</p>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card border-0 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1573497491208-6b1acb260507?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Vet">
+
+        <!-- Value 2 -->
+        <div class="col-md-4 col-sm-6">
+          <div class="card border-0 shadow-sm h-100">
+            <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=80" 
+                class="card-img-top" alt="Peduli Hewan">
             <div class="card-body">
-              <h5 class="fw-bold">Pace</h5>
-              <p>Dokter Hewan</p>
+              <h5 class="fw-bold">Profesionalisme & Keahlian</h5>
+              <p>Setiap layanan dilakukan oleh tim berpengalaman dengan standar kebersihan dan keamanan tinggi.</p>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card border-0 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Staff">
+
+        <!-- Value 3 -->
+        <div class="col-md-4 col-sm-6 mx-auto">
+          <div class="card border-0 shadow-sm h-100">
+            <img src="https://images.unsplash.com/photo-1525253086316-d0c936c814f8?auto=format&fit=crop&w=800&q=80" 
+                class="card-img-top" alt="Kepercayaan">
             <div class="card-body">
-              <h5 class="fw-bold">Asima</h5>
-              <p>Customer Care & Kasir</p>
+              <h5 class="fw-bold">Kepercayaan & Integritas</h5>
+              <p>Kami menjaga kepercayaan pelanggan dengan pelayanan jujur, transparan, dan bertanggung jawab.</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- CONTACT SECTION -->
-  <section id="contact" class="py-5">
-    <div class="container text-center">
-      <h2 class="fw-bold mb-4">Hubungi Kami</h2>
-      <p>📍 Jl. Sudirman No. 45, Yogyakarta</p>
-      <p>📞 0812-3456-7890</p>
-      <a href="https://wa.me/6281234567890" class="btn btn-success mt-3">Chat WhatsApp</a>
     </div>
   </section>
 

@@ -24,8 +24,16 @@
       <input type="date" name="TGL_LAHIR_CUSTOMER" class="form-control" value="{{ $customer->TGL_LAHIR_CUSTOMER ?? '' }}" required>
     </div>
     <div class="mb-3">
-      <label>Nomor Telepon</label>
-      <input type="text" name="NOMOR_TELEPON_CUSTOMER" class="form-control" value="{{ $customer->NOMOR_TELEPON_CUSTOMER ?? '' }}" required>
+    <label class="form-label">Nomor Telepon</label>
+    <input 
+        type="text" 
+        name="NOMOR_TELEPON_CUSTOMER" 
+        class="form-control" 
+        required 
+        pattern="[0-9]{10,12}"        
+        maxlength="12"                
+        inputmode="numeric"           
+        title="Nomor telepon hanya boleh berisi angka (10 - 12 digit)">
     </div>
 
     <button type="submit" class="btn btn-success">Simpan</button>

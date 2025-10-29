@@ -1,15 +1,28 @@
-/* HERO SECTION */
 .hero-profile {
-  background: url('https://images.unsplash.com/photo-1601758125946-6ec2ef642b04?auto=format&fit=crop&w=1400&q=80')
-    center/cover no-repeat;
-  height: 60vh;
+  position: relative;
+  height: 450px; /* ubah sesuai kebutuhan tinggi banner */
+  background: url("{{ asset('assets/images/Brown White Modern Minimalist Pet Shop Banner.png') }}") center center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  color: white;
 }
 
+.hero-profile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3); /* overlay tipis biar teks tetap terbaca */
+}
+
+.hero-profile .container {
+  position: relative;
+  z-index: 1;
+}
 /* ABOUT SECTION */
 .about p {
   line-height: 1.7;
@@ -36,3 +49,29 @@ footer {
   font-size: 0.9rem;
   letter-spacing: 0.5px;
 }
+
+.values .card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .values .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  .values .card-img-top {
+    height: 200px; /* gambar lebih kecil */
+    object-fit: cover; /* potong biar proporsional */
+  }
+  .values .card-body {
+    padding: 1.25rem;
+  }
+  .values h5 {
+    font-size: 1.1rem;
+  }
+  .values p {
+    font-size: 0.95rem;
+    color: #6c757d;
+  }
+
+  

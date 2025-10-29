@@ -21,26 +21,27 @@ class LayananController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'NAMA_LAYANAN' => 'required|string|max:100',
-            'DESKRIPSI_LAYANAN' => 'required|string|max:255',
-            'GAMBAR_LAYANAN' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'HARGA_LAYANAN' => 'required|numeric',
-        ]);
+       $request->validate([
+        'NAMA_LAYANAN' => 'required',
+        'DESKRIPSI_LAYANAN' => 'required',
+        'HARGA_LAYANAN' => 'required|integer',
+        'GAMBAR_LAYANAN' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
 
-        $path = null;
-        if ($request->hasFile('GAMBAR_LAYANAN')) {
-            $path = $request->file('GAMBAR_LAYANAN')->store('layanan', 'public');
-        }
+    $path = null;
+    if ($request->hasFile('GAMBAR_LAYANAN')) {
+        // simpan file di folder storage/app/public/produk
+        $path = $request->file('GAMBAR_LAYANAN')->store('layanan', 'public');
+    }
 
-        Layanan::create([
-            'NAMA_LAYANAN' => $request->NAMA_LAYANAN,
-            'DESKRIPSI_LAYANAN' => $request->DESKRIPSI_LAYANAN,
-            'GAMBAR_LAYANAN' => $path,
-            'HARGA_LAYANAN' => $request->HARGA_LAYANAN,
-        ]);
+    Layanan::create([
+        'NAMA_LAYANAN' => $request->NAMA_LAYANAN,
+        'DESKRIPSI_LAYANAN' => $request->DESKRIPSI_LAYANAN,
+        'HARGA_LAYANAN' => $request->HARGA_LAYANAN,
+        'GAMBAR_LAYANAN' => $path, // simpan path file ke database
+    ]);
 
-        return redirect()->route('layanan.index')->with('success', 'Layanan berhasil ditambahkan.');
+    return redirect()->route('layanan.index')->with('success', 'Layanan berhasil ditambahkan!');
     }
 
     public function edit(Layanan $layanan)

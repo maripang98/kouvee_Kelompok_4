@@ -21,7 +21,7 @@
 
     <div class="mb-3">
       <label class="form-label">Alamat</label>
-      <textarea name="ALAMAT_PAGAWAI" class="form-control" rows="3" required></textarea>
+      <textarea name="ALAMAT_PEGAWAI" class="form-control" rows="3" required></textarea>
     </div>
 
     <div class="mb-3">
@@ -30,8 +30,16 @@
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Nomor Telepon</label>
-      <input type="text" name="NOMOR_TELEPON_PEGAWAI" class="form-control" required>
+    <label class="form-label">Nomor Telepon</label>
+    <input 
+        type="text" 
+        name="NOMOR_TELEPON_PEGAWAI" 
+        class="form-control" 
+        required 
+        pattern="[0-9]{10,12}"        
+        maxlength="12"                
+        inputmode="numeric"           
+        title="Nomor telepon hanya boleh berisi angka (10 - 12 digit)">
     </div>
 
     <div class="mb-3">

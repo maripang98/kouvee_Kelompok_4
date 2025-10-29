@@ -22,7 +22,7 @@
 
     <div class="mb-3">
       <label class="form-label">Alamat</label>
-      <textarea name="ALAMAT_PAGAWAI" class="form-control" rows="3" required>{{ $pegawai->ALAMAT_PAGAWAI }}</textarea>
+      <textarea name="ALAMAT_PEGAWAI" class="form-control" rows="3" required>{{ $pegawai->ALAMAT_PEGAWAI }}</textarea>
     </div>
 
     <div class="mb-3">

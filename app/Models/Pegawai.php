@@ -13,8 +13,8 @@ class Pegawai extends Model
     protected $fillable = [
         'ID_JABATAN',
         'NAMA_PEGAWAI',
-        'ALAMAT_PAGAWAI',
-        'TGL_LAHIR_PEGAWI',
+        'ALAMAT_PEGAWAI',
+        'TGL_LAHIR_PEGAWAI',
         'NOMOR_TELEPON_PEGAWAI',
         'USERNAME',
         'PASSWORD',

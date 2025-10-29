@@ -17,7 +17,7 @@
   <!-- ✅ NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="{{ url('/') }}">🐾 Kouvee Petshop</a>
+      <a class="navbar-brand fw-bold" href="{{ url('/') }}"> Kouvee Petshop</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -76,8 +76,12 @@
       @foreach ($produks as $produk)
         <div class="col-md-3">
           <div class="card border-0 shadow-sm h-100">
-            <img src="{{ $produk->GAMBAR_PRODUK ? asset('storage/' . $produk->GAMBAR_PRODUK) : 'https://via.placeholder.com/400x250?text=No+Image' }}"
-                 class="card-img-top" alt="{{ $produk->NAMA_PRODUK }}">
+            <img 
+              src="{{ $produk->GAMBAR_PRODUK 
+                      ? asset('storage/' . $produk->GAMBAR_PRODUK) 
+                      : 'https://via.placeholder.com/400x250?text=No+Image' }}" 
+              class="card-img-top" 
+              alt="{{ $produk->NAMA_PRODUK }}">
             <div class="card-body text-center">
               <h5 class="card-title">{{ $produk->NAMA_PRODUK }}</h5>
               <p class="text-muted small mb-1">Stok: {{ $produk->STOK_PRODUK }}</p>
@@ -117,18 +121,6 @@
     </div>
   </div>
 </section>
-
-
-
-  <!-- 📍 CONTACT SECTION -->
-  <section id="contact" class="py-5 text-center">
-    <div class="container">
-      <h2 class="fw-bold mb-4">Hubungi Kami</h2>
-      <p>📍 Jl. Sudirman No. 45, Yogyakarta</p>
-      <p>📞 0812-3456-7890</p>
-      <a href="https://wa.me/6281234567890" class="btn btn-success mt-3">Chat via WhatsApp</a>
-    </div>
-  </section>
 
   <!-- FOOTER -->
   <footer class="bg-dark text-white text-center py-3 mt-5">

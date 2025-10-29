@@ -22,9 +22,7 @@
       <div class="col-6 col-md-3">
         <div class="card border-0 shadow-sm h-100">
           <div class="position-relative">
-            <img src="{{ $layanan->GAMBAR_LAYANAN 
-                          ? asset('storage/' . $layanan->GAMBAR_LAYANAN) 
-                          : 'https://via.placeholder.com/400x250?text=No+Image' }}"
+            <img src="{{ $layanan->GAMBAR_LAYANAN ? asset('storage/' . $layanan->GAMBAR_LAYANAN) : 'https://via.placeholder.com/400x250?text=No+Image' }}"
                  class="card-img-top rounded-top" alt="{{ $layanan->NAMA_LAYANAN }}">
             <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-2">
             {{ $layanan->created_at ? $layanan->created_at->format('d M Y') : 'Baru' }}

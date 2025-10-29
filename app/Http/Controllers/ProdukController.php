@@ -20,16 +20,29 @@ class ProdukController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'NAMA_PRODUK' => 'required',
-            'DESKRIPSI_PRODUK' => 'required',
-            'STOK_PRODUK' => 'required|integer',
-            'HARGA_PRODUK' => 'required|integer',
-        ]);
+       $request->validate([
+        'NAMA_PRODUK' => 'required',
+        'DESKRIPSI_PRODUK' => 'required',
+        'STOK_PRODUK' => 'required|integer',
+        'HARGA_PRODUK' => 'required|integer',
+        'GAMBAR_PRODUK' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
 
-        Produk::create($request->all());
+    $path = null;
+    if ($request->hasFile('GAMBAR_PRODUK')) {
+        // simpan file di folder storage/app/public/produk
+        $path = $request->file('GAMBAR_PRODUK')->store('produk', 'public');
+    }
 
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan!');
+    Produk::create([
+        'NAMA_PRODUK' => $request->NAMA_PRODUK,
+        'DESKRIPSI_PRODUK' => $request->DESKRIPSI_PRODUK,
+        'STOK_PRODUK' => $request->STOK_PRODUK,
+        'HARGA_PRODUK' => $request->HARGA_PRODUK,
+        'GAMBAR_PRODUK' => $path, // simpan path file ke database
+    ]);
+
+    return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan!');
     }
 
     public function edit($id)

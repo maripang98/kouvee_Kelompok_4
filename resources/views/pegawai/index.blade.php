@@ -29,7 +29,7 @@
       <tr>
         <td>{{ $pegawai->ID_PEGAWAI }}</td>
         <td>{{ $pegawai->NAMA_PEGAWAI }}</td>
-        <td>{{ $pegawai->ALAMAT_PAGAWAI }}</td>
+        <td>{{ $pegawai->ALAMAT_PEGAWAI }}</td>
         <td>{{ $pegawai->TGL_LAHIR_PEGAWAI }}</td>
         <td>{{ $pegawai->NOMOR_TELEPON_PEGAWAI }}</td>
         <td>{{ $pegawai->USERNAME }}</td>

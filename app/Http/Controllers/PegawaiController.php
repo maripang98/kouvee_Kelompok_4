@@ -23,14 +23,18 @@ class PegawaiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ID_JABATAN' => 'required|integer',
-            'NAMA_PEGAWAI' => 'required|string|max:100',
-            'ALAMAT_PAGAWAI' => 'required|string',
-            'TGL_LAHIR_PEGAWAI' => 'required|date',
-            'NOMOR_TELEPON_PEGAWAI' => 'required|string|max:20',
-            'USERNAME' => 'required|string|max:50',
-            'PASSWORD' => 'required|string|max:255',
-        ]);
+        'ID_JABATAN' => 'required|integer',
+        'NAMA_PEGAWAI' => 'required|string|max:100',
+        'ALAMAT_PEGAWAI' => 'required|string',
+        'TGL_LAHIR_PEGAWAI' => 'required|date',
+        'NOMOR_TELEPON_PEGAWAI' => [
+            'required',
+            'digits_between:10,12', // ✅ minimal 10 digit, maksimal 12 digit
+            'regex:/^[0-9]+$/',     // ✅ hanya boleh angka
+        ],
+        'USERNAME' => 'required|string|max:50',
+        'PASSWORD' => 'required|string|max:255',
+]);
 
         Pegawai::create($request->all());
 
@@ -50,14 +54,18 @@ class PegawaiController extends Controller
         $pegawai = Pegawai::findOrFail($id);
 
         $request->validate([
-            'ID_JABATAN' => 'required|integer',
-            'NAMA_PEGAWAI' => 'required|string|max:100',
-            'ALAMAT_PAGAWAI' => 'required|string',
-            'TGL_LAHIR_PEGAWAI' => 'required|date',
-            'NOMOR_TELEPON_PEGAWAI' => 'required|string|max:20',
-            'USERNAME' => 'required|string|max:50',
-            'PASSWORD' => 'required|string|max:255',
-        ]);
+        'ID_JABATAN' => 'required|integer',
+        'NAMA_PEGAWAI' => 'required|string|max:100',
+        'ALAMAT_PEGAWAI' => 'required|string',
+        'TGL_LAHIR_PEGAWAI' => 'required|date',
+        'NOMOR_TELEPON_PEGAWAI' => [
+            'required',
+            'digits_between:10,12', // ✅ minimal 10 digit, maksimal 12 digit
+            'regex:/^[0-9]+$/',     // ✅ hanya boleh angka
+        ],
+        'USERNAME' => 'required|string|max:50',
+        'PASSWORD' => 'required|string|max:255',
+    ]);
 
         $pegawai->update($request->all());
 
