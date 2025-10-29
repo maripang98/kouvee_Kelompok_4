@@ -7,9 +7,14 @@ use App\Models\Produk;
 
 class ProdukController extends Controller
 {
-     public function index()
+    public function index(Request $request)
     {
-        $produks = Produk::all(); // pakai variabel plural untuk di-loop di view
+        $search = $request->input('search');
+
+        $produks = Produk::when($search, function ($query, $search) {
+            $query->where('NAMA_PRODUK', 'like', "%{$search}%");
+        })->get();
+
         return view('produk.index', compact('produks'));
     }
 

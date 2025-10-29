@@ -8,9 +8,14 @@ use App\Models\Customer;
 
 class HewanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $hewans = Hewan::with('customer')->get();
+        $search = $request->input('search');
+
+        $hewans = Hewan::when($search, function ($query, $search) {
+            $query->where('NAMA_HEWAN', 'like', "%{$search}%");
+        })->get();
+
         return view('hewan.index', compact('hewans'));
     }
 

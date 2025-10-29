@@ -7,9 +7,14 @@ use App\Models\Customer;
 
 class CustomerController extends Controller
 {
-     public function index()
+     public function index(Request $request)
     {
-        $customers = Customer::all();
+        $search = $request->input('search');
+
+        $customers = Customer::when($search, function ($query, $search) {
+            $query->where('NAMA_CUSTOMER', 'like', "%{$search}%");
+        })->get();
+
         return view('customer.index', compact('customers'));
     }
 

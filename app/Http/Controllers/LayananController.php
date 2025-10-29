@@ -8,11 +8,18 @@ use App\Models\Layanan;
 
 class LayananController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
-        $layanans = Layanan::all();
+        $search = $request->input('search');
+
+        $layanans = Layanan::when($search, function ($query, $search) {
+            $query->where('NAMA_LAYANAN', 'like', "%{$search}%");
+        })->get();
+
         return view('layanan.index', compact('layanans'));
     }
+
 
     public function create()
     {

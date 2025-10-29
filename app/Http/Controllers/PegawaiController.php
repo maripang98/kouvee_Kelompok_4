@@ -7,9 +7,15 @@ use App\Models\Pegawai;
 
 class PegawaiController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
-        $pegawais = Pegawai::all(); // pakai plural biar konsisten di view
+        $search = $request->input('search');
+
+        $pegawais = Pegawai::when($search, function ($query, $search) {
+            $query->where('NAMA_PEGAWAI', 'like', "%{$search}%");
+        })->get();
+
         return view('pegawai.index', compact('pegawais'));
     }
 
@@ -60,8 +66,8 @@ class PegawaiController extends Controller
         'TGL_LAHIR_PEGAWAI' => 'required|date',
         'NOMOR_TELEPON_PEGAWAI' => [
             'required',
-            'digits_between:10,12', // ✅ minimal 10 digit, maksimal 12 digit
-            'regex:/^[0-9]+$/',     // ✅ hanya boleh angka
+            'digits_between:10,12', 
+            'regex:/^[0-9]+$/',     
         ],
         'USERNAME' => 'required|string|max:50',
         'PASSWORD' => 'required|string|max:255',
