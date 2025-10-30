@@ -31,7 +31,7 @@
 
           <div class="card-body text-center">
             <h6 class="fw-bold text-truncate">{{ $produk->NAMA_PRODUK }}</h6>
-            <p class="fw-semibold text-danger mb-1">
+            <p class="fw-semibold text-dark mb-0">
               Rp {{ number_format($produk->HARGA_PRODUK, 0, ',', '.') }}
             </p>
           </div>

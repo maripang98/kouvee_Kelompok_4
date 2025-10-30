@@ -113,7 +113,7 @@
             <div class="card-body text-center">
               <h5 class="fw-bold">{{ $layanan->NAMA_LAYANAN }}</h5>
               <p class="text-muted small">{{ Str::limit($layanan->DESKRIPSI_LAYANAN, 60) }}</p>
-              <p class="fw-semibold text-success mb-0">Rp {{ number_format($layanan->HARGA_LAYANAN, 0, ',', '.') }}</p>
+              <p class="fw-semibold text-dark mb-0">Rp {{ number_format($layanan->HARGA_LAYANAN, 0, ',', '.') }}</p>
             </div>
           </div>
         </div>

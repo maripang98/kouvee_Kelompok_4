@@ -1,7 +1,7 @@
 .hero-profile {
   position: relative;
-  height: 450px; /* ubah sesuai kebutuhan tinggi banner */
-  background: url("{{ asset('assets/images/Brown White Modern Minimalist Pet Shop Banner.png') }}") center center/cover no-repeat;
+  height: 450px;
+  background: url("/resources/images/b564df6f11eb8a846f8da0c26dac8485.jpg") center center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;

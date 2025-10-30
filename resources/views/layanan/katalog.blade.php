@@ -34,7 +34,7 @@
             <p class="text-muted small mb-2">
               {{ Str::limit($layanan->DESKRIPSI_LAYANAN, 50) }}
             </p>
-            <p class="fw-semibold text-success mb-0">
+            <p class="fw-semibold text-dark mb-0">
               Rp {{ number_format($layanan->HARGA_LAYANAN, 0, ',', '.') }}
             </p>
           </div>
