@@ -20,25 +20,20 @@
   <div class="row g-4">
     @forelse ($layanans as $layanan)
       <div class="col-6 col-md-3">
-        <div class="card border-0 shadow-sm h-100">
-          <div class="position-relative">
-            <img src="{{ $layanan->GAMBAR_LAYANAN ? asset('storage/' . $layanan->GAMBAR_LAYANAN) : 'https://via.placeholder.com/400x250?text=No+Image' }}"
-                 class="card-img-top rounded-top" alt="{{ $layanan->NAMA_LAYANAN }}">
-            <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-2">
-            {{ $layanan->created_at ? $layanan->created_at->format('d M Y') : 'Baru' }}
-            </span>
+        <a href="{{ route('layanan.show', $layanan->ID_LAYANAN) }}" class="text-decoration-none text-dark">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="position-relative">
+              <img src="{{ $layanan->GAMBAR_LAYANAN ? asset('storage/' . $layanan->GAMBAR_LAYANAN) : 'https://via.placeholder.com/400x250?text=No+Image' }}"
+                  class="card-img-top rounded-top" alt="{{ $layanan->NAMA_LAYANAN }}">
+            </div>
+            <div class="card-body text-center">
+              <h6 class="fw-bold text-truncate">{{ $layanan->NAMA_LAYANAN }}</h6>
+              <p class="fw-semibold text-dark mb-0">
+                Rp {{ number_format($layanan->HARGA_LAYANAN, 0, ',', '.') }}
+              </p>
+            </div>
           </div>
-
-          <div class="card-body text-center">
-            <h6 class="fw-bold text-truncate">{{ $layanan->NAMA_LAYANAN }}</h6>
-            <p class="text-muted small mb-2">
-              {{ Str::limit($layanan->DESKRIPSI_LAYANAN, 50) }}
-            </p>
-            <p class="fw-semibold text-dark mb-0">
-              Rp {{ number_format($layanan->HARGA_LAYANAN, 0, ',', '.') }}
-            </p>
-          </div>
-        </div>
+        </a>
       </div>
     @empty
       <div class="text-center text-muted py-5">

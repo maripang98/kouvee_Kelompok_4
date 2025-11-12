@@ -6,7 +6,7 @@
   {{-- 🔍 Form Pencarian --}}
   <form action="{{ route('customer.index') }}" method="GET" class="d-flex mb-3">
     <input type="text" name="search" class="form-control me-2" 
-           placeholder="Cari customer (nama atau no. telepon)" 
+           placeholder="Cari customer (nama)" 
            value="{{ request('search') }}">
     <button type="submit" class="btn btn-outline-primary">Search</button>
     <a href="{{ route('customer.index') }}" class="btn btn-secondary ms-2">Reset</a>

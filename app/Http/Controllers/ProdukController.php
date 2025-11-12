@@ -66,8 +66,9 @@ class ProdukController extends Controller
 
     public function destroy($id)
     {
-        Produk::destroy($id);
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil dihapus!');
+        $produk = Produk::findOrFail($id);
+        $produk->delete(); // hanya menandai deleted_at, tidak menghapus di database
+        return redirect()->route('produk.index')->with('success', 'Produk diarsipkan.');
     }
 
     public function katalog(Request $request)
@@ -82,5 +83,12 @@ class ProdukController extends Controller
 
         return view('produk.katalog', compact('produks'));
     }
+
+    public function show($id)
+    {
+        $produk = Produk::findOrFail($id); // Ambil produk berdasarkan ID
+        return view('produk.show', compact('produk')); // Kirim ke view
+    }
+
 
 }

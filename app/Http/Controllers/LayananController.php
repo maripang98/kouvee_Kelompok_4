@@ -76,21 +76,29 @@ class LayananController extends Controller
         return redirect()->route('layanan.index')->with('success', 'Layanan berhasil diperbarui.');
     }
 
-    public function destroy(Layanan $layanan)
+    public function destroy($id)
     {
-        $layanan->delete();
-        return redirect()->route('layanan.index')->with('success', 'Layanan berhasil dihapus.');
+        $layanan = Layanan::findOrFail($id);
+        $layanan->delete(); // hanya menandai deleted_at, tidak menghapus di database
+        return redirect()->route('layanan.index')->with('success', 'Layanan diarsipkan.');
     }
+    
 
     public function katalog(Request $request)
-{
-    $search = $request->input('search');
+    {
+        $search = $request->input('search');
 
-    $layanans = Layanan::when($search, function ($query, $search) {
-        $query->where('NAMA_LAYANAN', 'like', "%{$search}%");
-    })->latest('ID_LAYANAN')->paginate(8);
+        $layanans = Layanan::when($search, function ($query, $search) {
+            $query->where('NAMA_LAYANAN', 'like', "%{$search}%");
+        })->latest('ID_LAYANAN')->paginate(8);
 
-    return view('layanan.katalog', compact('layanans', 'search'));
-}
+        return view('layanan.katalog', compact('layanans', 'search'));
+    }
+
+    public function show($id)
+    {
+        $layanan = \App\Models\Layanan::findOrFail($id);
+        return view('layanan.show', compact('layanan'));
+    }
 
 }

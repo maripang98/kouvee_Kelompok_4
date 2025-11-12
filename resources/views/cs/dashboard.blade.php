@@ -8,6 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   @vite(['resources/css/owner.css', 'resources/js/app.js'])
 </head>
+
 <body class="bg-light">
 
   <!-- ✅ NAVBAR -->
@@ -20,7 +21,11 @@
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link {{ Request::is('cs/dashboard') ? 'active' : '' }}" href="{{ route('cs.dashboard') }}">Dashboard</a></li>
+          <li class="nav-item">
+            <a class="nav-link {{ Request::is('cs/dashboard') ? 'active' : '' }}" href="{{ route('cs.dashboard') }}">
+              Dashboard
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -36,7 +41,9 @@
         <div class="card shadow-sm border-0 text-center p-4">
           <h5 class="fw-bold text-secondary">Total Customer</h5>
           <h2 class="fw-bold text-primary">{{ $totalCustomer }}</h2>
-          <a href="{{ route('cs.customer.index') }}" class="btn btn-outline-primary btn-sm mt-2">Kelola Customer</a>
+          <a href="{{ route('cs.customer.index') }}" class="btn btn-outline-primary btn-sm mt-2">
+            Kelola Customer
+          </a>
         </div>
       </div>
 
@@ -44,7 +51,9 @@
         <div class="card shadow-sm border-0 text-center p-4">
           <h5 class="fw-bold text-secondary">Total Hewan</h5>
           <h2 class="fw-bold text-success">{{ $totalHewan }}</h2>
-          <a href="{{ route('cs.hewan.index') }}" class="btn btn-outline-success btn-sm mt-2">Kelola Hewan</a>
+          <a href="{{ route('cs.hewan.index') }}" class="btn btn-outline-success btn-sm mt-2">
+            Kelola Hewan
+          </a>
         </div>
       </div>
     </div>
@@ -58,13 +67,20 @@
             <h5 class="fw-bold mb-0">👩‍💼 Customer Terbaru</h5>
             <a href="{{ route('cs.customer.index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
           </div>
+
           <table class="table table-sm table-striped align-middle mb-0">
             <thead class="table-dark">
-              <tr><th>Nama</th><th>No. Telepon</th></tr>
+              <tr>
+                <th>Nama</th>
+                <th>No. Telepon</th>
+              </tr>
             </thead>
             <tbody>
               @foreach ($customers as $c)
-                <tr><td>{{ $c->NAMA_CUSTOMER }}</td><td>{{ $c->NOMOR_TELEPON_CUSTOMER ?? '-' }}</td></tr>
+                <tr>
+                  <td>{{ $c->NAMA_CUSTOMER }}</td>
+                  <td>{{ $c->NOMOR_TELEPON_CUSTOMER ?? '-' }}</td>
+                </tr>
               @endforeach
             </tbody>
           </table>
@@ -78,9 +94,14 @@
             <h5 class="fw-bold mb-0">🐾 Hewan Terbaru</h5>
             <a href="{{ route('cs.hewan.index') }}" class="btn btn-sm btn-success">Lihat Semua</a>
           </div>
+
           <table class="table table-sm table-striped align-middle mb-0">
             <thead class="table-dark">
-              <tr><th>Nama Hewan</th><th>Jenis</th><th>Pemilik</th></tr>
+              <tr>
+                <th>Nama Hewan</th>
+                <th>Jenis</th>
+                <th>Pemilik</th>
+              </tr>
             </thead>
             <tbody>
               @foreach ($hewans as $h)
@@ -92,6 +113,82 @@
               @endforeach
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAFTAR PRODUK & LAYANAN -->
+    <div class="row g-4 mt-4">
+      <div class="col-md-6">
+        <div class="card shadow-sm border-0 p-3">
+          <h5 class="fw-bold mb-3">🧴 Daftar Produk</h5>
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>Harga</th>
+                <th>Stok</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($produks as $p)
+                <tr>
+                  <td>{{ $p->NAMA_PRODUK }}</td>
+                  <td>Rp {{ number_format($p->HARGA_PRODUK, 0, ',', '.') }}</td>
+                  <td>{{ $p->STOK_PRODUK }}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow-sm border-0 p-3">
+          <h5 class="fw-bold mb-3">✂️ Daftar Layanan</h5>
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>Harga</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($layanans as $l)
+                <tr>
+                  <td>{{ $l->NAMA_LAYANAN }}</td>
+                  <td>Rp {{ number_format($l->HARGA_LAYANAN, 0, ',', '.') }}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRANSAKSI PRODUK & LAYANAN -->
+    <div class="row g-4 mt-4">
+      <div class="col-md-6">
+        <div class="card shadow-sm border-0 text-center p-4">
+          <h5 class="fw-bold text-secondary">Transaksi Penjualan Produk</h5>
+          <a href="{{ route('cs.transaksi_produk.create') }}" class="btn btn-outline-primary btn-sm mt-2">
+            + Entri Baru
+          </a>
+          <a href="{{ route('cs.transaksi_produk.index') }}" class="btn btn-primary btn-sm mt-2">
+            📋 Lihat Transaksi
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow-sm border-0 text-center p-4">
+          <h5 class="fw-bold text-secondary">Transaksi Penjualan Layanan</h5>
+          <a href="{{ route('cs.transaksi_layanan.create') }}" class="btn btn-outline-success btn-sm mt-2">
+            + Entri Baru
+          </a>
+          <a href="{{ route('cs.transaksi_layanan.index') }}" class="btn btn-success btn-sm mt-2">
+            📋 Lihat Transaksi
+          </a>
         </div>
       </div>
     </div>

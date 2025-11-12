@@ -9,7 +9,9 @@ use App\Http\Controllers\{
     HewanController,
     CustomerController,
     DashboardOwnerController,
-    DashboardCsController
+    DashboardCsController,
+    CSTransaksiProdukController,
+    CSTransaksiLayananController
 };
 
 /*
@@ -27,6 +29,9 @@ Route::view('/about', 'about')->name('about');
 // 🛍️ Katalog publik (harus didefinisikan sebelum resource)
 Route::get('/katalog-produk', [ProdukController::class, 'katalog'])->name('produk.katalog');
 Route::get('/katalog-layanan', [LayananController::class, 'katalog'])->name('layanan.katalog');
+// Detail produk
+Route::get('/produk/{id}', [App\Http\Controllers\ProdukController::class, 'show'])->name('produk.show');
+Route::get('/layanan/{id}', [App\Http\Controllers\LayananController::class, 'show'])->name('layanan.show');
 
 
 /*
@@ -64,11 +69,18 @@ Route::prefix('owner')->name('owner.')->group(function () {
 | 💼 DASHBOARD CUSTOMER SERVICE (CS)
 |--------------------------------------------------------------------------
 */
+
 Route::prefix('cs')->name('cs.')->group(function () {
     Route::get('/dashboard', [DashboardCsController::class, 'index'])->name('dashboard');
 
-    Route::resources([
-        'customer' => CustomerController::class,
-        'hewan' => HewanController::class,
-    ]);
+    // 🔹 Master Data
+    Route::resource('customer', CustomerController::class);
+    Route::resource('hewan', HewanController::class);
+
+    // 🔹 Transaksi Produk
+    Route::resource('transaksi_produk', CSTransaksiProdukController::class);
+
+    // 🔹 Transaksi Layanan
+    Route::resource('transaksi_layanan', CSTransaksiLayananController::class);
 });
+

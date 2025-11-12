@@ -78,10 +78,10 @@ class PegawaiController extends Controller
         return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil diperbarui!');
     }
 
-    // Hapus data pegawai
     public function destroy($id)
     {
-        Pegawai::destroy($id);
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil dihapus!');
+        $pegawai = Pegawai::findOrFail($id);
+        $pegawai->delete(); // hanya menandai deleted_at, tidak menghapus di database
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai diarsipkan.');
     }
 }

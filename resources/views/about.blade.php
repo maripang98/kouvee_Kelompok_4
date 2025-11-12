@@ -52,8 +52,9 @@
         <div class="col-md-6">
         <h2 class="fw-bold mb-3">Profil Kami</h2>
         <p class="text-muted">
-            Kouvee Petshop berdiri sejak 2018 dan telah menjadi salah satu pusat perawatan hewan terbaik di Yogyakarta.
-            Kami menyediakan berbagai layanan mulai dari grooming, konsultasi dokter hewan, hingga penjualan makanan dan perlengkapan hewan peliharaan.
+            Kouvee Pet Shop berdiri sejak tahun 2024 dan telah menjadi salah satu pusat perawatan hewan terbaik di Yogyakarta. Kami menyediakan berbagai layanan lengkap mulai dari grooming profesional hingga penjualan makanan dan perlengkapan hewan peliharaan berkualitas tinggi.
+            Dengan dukungan tenaga ahli berpengalaman dan fasilitas yang modern, kami berkomitmen untuk memberikan pengalaman terbaik bagi setiap pelanggan dan hewan kesayangannya. Kami juga senantiasa menghadirkan produk-produk unggulan dari merek terpercaya untuk memastikan kebutuhan nutrisi dan kenyamanan hewan peliharaan Anda terpenuhi.
+            Kouvee Pet Shop berpegang pada prinsip pelayanan dengan cinta dan kasih sayang, karena kami percaya setiap hewan berhak mendapatkan perhatian dan perawatan terbaik.
         </p>
         <p class="text-muted">
             Kami berkomitmen memberikan pelayanan terbaik dengan cinta dan kasih sayang untuk setiap hewan yang datang ke toko kami.

@@ -65,10 +65,10 @@ class HewanController extends Controller
         return redirect()->route('hewan.index')->with('success', 'Data hewan berhasil diperbarui!');
     }
 
-    // Hapus hewan
     public function destroy($id)
     {
-        Hewan::destroy($id);
-        return redirect()->route('hewan.index')->with('success', 'Hewan berhasil dihapus!');
+        $hewan = Hewan::findOrFail($id);
+        $hewan->delete(); // hanya menandai deleted_at, tidak menghapus di database
+        return redirect()->route('hewan.index')->with('success', 'Hewan diarsipkan.');
     }
 }
