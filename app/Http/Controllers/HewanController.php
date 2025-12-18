@@ -12,18 +12,20 @@ class HewanController extends Controller
     {
         $search = $request->input('search');
 
-        $hewans = Hewan::when($search, function ($query, $search) {
+       $hewans = Hewan::when($search, function ($query, $search) {
             $query->where('NAMA_HEWAN', 'like', "%{$search}%");
-        })->get();
+        })
+        ->paginate(10)   
+        ->appends(request()->query());  
 
-        return view('hewan.index', compact('hewans'));
+        return view('cs.hewan.index', compact('hewans'));
     }
 
     // Form tambah hewan baru
     public function create()
     {
         $customers = Customer::all(); // ambil daftar owner (customer)
-        return view('hewan.create', compact('customers'));
+        return view('cs.hewan.create', compact('customers'));
     }
 
     // Simpan data hewan baru
@@ -38,7 +40,7 @@ class HewanController extends Controller
 
         Hewan::create($request->all());
 
-        return redirect()->route('hewan.index')->with('success', 'Hewan berhasil ditambahkan!');
+        return redirect()->route('cs.hewan.index')->with('success', 'Hewan berhasil ditambahkan!');
     }
 
     // Form edit hewan
@@ -46,7 +48,7 @@ class HewanController extends Controller
     {
         $hewan = Hewan::findOrFail($id);
         $customers = Customer::all();
-        return view('hewan.edit', compact('hewan', 'customers'));
+        return view('cs.hewan.edit', compact('hewan', 'customers'));
     }
 
     // Update data hewan
@@ -62,13 +64,13 @@ class HewanController extends Controller
         $hewan = Hewan::findOrFail($id);
         $hewan->update($request->all());
 
-        return redirect()->route('hewan.index')->with('success', 'Data hewan berhasil diperbarui!');
+        return redirect()->route('cs.hewan.index')->with('success', 'Data hewan berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
         $hewan = Hewan::findOrFail($id);
         $hewan->delete(); // hanya menandai deleted_at, tidak menghapus di database
-        return redirect()->route('hewan.index')->with('success', 'Hewan diarsipkan.');
+        return redirect()->route('cs.hewan.index')->with('success', 'Hewan diarsipkan.');
     }
 }

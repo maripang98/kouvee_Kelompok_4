@@ -15,12 +15,12 @@ class ProdukController extends Controller
             $query->where('NAMA_PRODUK', 'like', "%{$search}%");
         })->get();
 
-        return view('produk.index', compact('produks'));
+        return view('owner.produk.index', compact('produks'));
     }
 
     public function create()
     {
-        return view('produk.create');
+        return view('owner.produk.create');
     }
 
     public function store(Request $request)
@@ -47,13 +47,13 @@ class ProdukController extends Controller
         'GAMBAR_PRODUK' => $path, // simpan path file ke database
     ]);
 
-    return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan!');
+    return redirect()->route('owner.produk.index')->with('success', 'Produk berhasil ditambahkan!');
     }
 
     public function edit($id)
     {
         $produk = Produk::findOrFail($id);
-        return view('produk.edit', compact('produk'));
+        return view('owner.produk.edit', compact('produk'));
     }
 
     public function update(Request $request, $id)
@@ -61,33 +61,46 @@ class ProdukController extends Controller
         $produk = Produk::findOrFail($id);
         $produk->update($request->all());
 
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil diperbarui!');
+        return redirect()->route('owner.produk.index')->with('success', 'Produk berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
         $produk = Produk::findOrFail($id);
         $produk->delete(); // hanya menandai deleted_at, tidak menghapus di database
-        return redirect()->route('produk.index')->with('success', 'Produk diarsipkan.');
+        return redirect()->route('owner.produk.index')->with('success', 'Produk diarsipkan.');
     }
 
     public function katalog(Request $request)
     {
         $search = $request->input('search');
+        $sort   = $request->input('sort'); // NEW — menangkap pilihan sorting
 
-        $produks = \App\Models\Produk::when($search, function ($query, $search) {
-            $query->where('NAMA_PRODUK', 'like', "%{$search}%");
-        })
-        ->latest('ID_PRODUK')
-        ->paginate(12);
+        $produks = \App\Models\Produk::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('NAMA_PRODUK', 'like', "%{$search}%");
+            })
+            ->when($sort == 'harga_asc', function ($query) {
+                return $query->orderBy('HARGA_PRODUK', 'asc');
+            })
+            ->when($sort == 'harga_desc', function ($query) {
+                return $query->orderBy('HARGA_PRODUK', 'desc');
+            })
+            ->when(!$sort, function ($query) {
+                return $query->latest('ID_PRODUK');
+            })
 
-        return view('produk.katalog', compact('produks'));
+            ->paginate(12)
+            ->appends(['search' => $search, 'sort' => $sort]); 
+
+        return view('owner.produk.katalog', compact('produks'));
     }
+
 
     public function show($id)
     {
         $produk = Produk::findOrFail($id); // Ambil produk berdasarkan ID
-        return view('produk.show', compact('produk')); // Kirim ke view
+        return view('owner.produk.show', compact('produk')); // Kirim ke view
     }
 
 

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
+use Illuminate\Support\Facades\Hash;
 
 class PegawaiController extends Controller
 {
-
     public function index(Request $request)
     {
         $search = $request->input('search');
@@ -16,72 +16,106 @@ class PegawaiController extends Controller
             $query->where('NAMA_PEGAWAI', 'like', "%{$search}%");
         })->get();
 
-        return view('pegawai.index', compact('pegawais'));
+        return view('owner.pegawai.index', compact('pegawais'));
     }
 
-    // Form tambah pegawai baru
+    // Form tambah pegawai
     public function create()
     {
-        return view('pegawai.create');
+        return view('owner.pegawai.create');
     }
 
-    // Simpan data pegawai baru
+    // ==========================
+    // SIMPAN PEGAWAI BARU
+    // ==========================
     public function store(Request $request)
     {
         $request->validate([
-        'ID_JABATAN' => 'required|integer',
-        'NAMA_PEGAWAI' => 'required|string|max:100',
-        'ALAMAT_PEGAWAI' => 'required|string',
-        'TGL_LAHIR_PEGAWAI' => 'required|date',
-        'NOMOR_TELEPON_PEGAWAI' => [
-            'required',
-            'digits_between:10,12', // ✅ minimal 10 digit, maksimal 12 digit
-            'regex:/^[0-9]+$/',     // ✅ hanya boleh angka
-        ],
-        'USERNAME' => 'required|string|max:50',
-        'PASSWORD' => 'required|string|max:255',
-]);
+            'ID_JABATAN' => 'required|integer',
+            'NAMA_PEGAWAI' => 'required|string|max:100',
+            'ALAMAT_PEGAWAI' => 'required|string',
+            'TGL_LAHIR_PEGAWAI' => 'required|date',
+            'NOMOR_TELEPON_PEGAWAI' => [
+                'required',
+                'digits_between:10,12',
+                'regex:/^[0-9]+$/',
+            ],
+            'USERNAME' => 'required|string|max:50|unique:pegawai,USERNAME',
+            'PASSWORD' => 'required|string|min:6',
+        ]);
 
-        Pegawai::create($request->all());
+        Pegawai::create([
+            'ID_JABATAN' => $request->ID_JABATAN,
+            'NAMA_PEGAWAI' => $request->NAMA_PEGAWAI,
+            'ALAMAT_PEGAWAI' => $request->ALAMAT_PEGAWAI,
+            'TGL_LAHIR_PEGAWAI' => $request->TGL_LAHIR_PEGAWAI,
+            'NOMOR_TELEPON_PEGAWAI' => $request->NOMOR_TELEPON_PEGAWAI,
+            'USERNAME' => $request->USERNAME,
+            'PASSWORD' => Hash::make($request->PASSWORD), // ✅ HASH WAJIB
+        ]);
 
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil ditambahkan!');
+        return redirect()
+            ->route('owner.pegawai.index')
+            ->with('success', 'Pegawai berhasil ditambahkan!');
     }
 
-    // Form edit pegawai
+    // Form edit
     public function edit($id)
     {
         $pegawai = Pegawai::findOrFail($id);
-        return view('pegawai.edit', compact('pegawai'));
+        return view('owner.pegawai.edit', compact('pegawai'));
     }
 
-    // Update data pegawai
+    // ==========================
+    // UPDATE PEGAWAI
+    // ==========================
     public function update(Request $request, $id)
     {
         $pegawai = Pegawai::findOrFail($id);
 
         $request->validate([
-        'ID_JABATAN' => 'required|integer',
-        'NAMA_PEGAWAI' => 'required|string|max:100',
-        'ALAMAT_PEGAWAI' => 'required|string',
-        'TGL_LAHIR_PEGAWAI' => 'required|date',
-        'NOMOR_TELEPON_PEGAWAI' => [
-            'required',
-            'digits_between:10,12', 
-            'regex:/^[0-9]+$/',     
-        ],
-        'USERNAME' => 'required|string|max:50',
-        'PASSWORD' => 'required|string|max:255',
-    ]);
+            'ID_JABATAN' => 'required|integer',
+            'NAMA_PEGAWAI' => 'required|string|max:100',
+            'ALAMAT_PEGAWAI' => 'required|string',
+            'TGL_LAHIR_PEGAWAI' => 'required|date',
+            'NOMOR_TELEPON_PEGAWAI' => [
+                'required',
+                'digits_between:10,12',
+                'regex:/^[0-9]+$/',
+            ],
+            'USERNAME' => 'required|string|max:50|unique:pegawai,USERNAME,' . $pegawai->ID_PEGAWAI . ',ID_PEGAWAI',
+            'PASSWORD' => 'nullable|string|min:6', // ✅ BOLEH KOSONG
+        ]);
 
-        $pegawai->update($request->all());
+        $data = [
+            'ID_JABATAN' => $request->ID_JABATAN,
+            'NAMA_PEGAWAI' => $request->NAMA_PEGAWAI,
+            'ALAMAT_PEGAWAI' => $request->ALAMAT_PEGAWAI,
+            'TGL_LAHIR_PEGAWAI' => $request->TGL_LAHIR_PEGAWAI,
+            'NOMOR_TELEPON_PEGAWAI' => $request->NOMOR_TELEPON_PEGAWAI,
+            'USERNAME' => $request->USERNAME,
+        ];
 
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil diperbarui!');
+        // ✅ HASH HANYA JIKA PASSWORD DIISI
+        if ($request->filled('PASSWORD')) {
+            $data['PASSWORD'] = Hash::make($request->PASSWORD);
+        }
+
+        $pegawai->update($data);
+
+        return redirect()
+            ->route('owner.pegawai.index')
+            ->with('success', 'Pegawai berhasil diperbarui!');
     }
 
+    // Arsip pegawai (soft delete)
     public function destroy($id)
     {
         $pegawai = Pegawai::findOrFail($id);
-        $pegawai->delete(); // hanya menandai deleted_at, tidak menghapus di database
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai diarsipkan.');
+        $pegawai->delete();
+
+        return redirect()
+            ->route('owner.pegawai.index')
+            ->with('success', 'Pegawai diarsipkan.');
     }
 }

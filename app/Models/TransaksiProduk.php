@@ -16,6 +16,7 @@ class TransaksiProduk extends Model
     protected $fillable = [
         'ID_PEGAWAI',
         'PEG_ID_PEGAWAI',
+        'ID_CUSTOMER',
         'KODE_TRANSAKSI_PENJUALAN_PRODUK',
         'TGL_TRANSAKSI_PENJUALAN_PRODUK',
         'SUB_TOTAL_PENJUALAN_PRODUK',
@@ -26,6 +27,21 @@ class TransaksiProduk extends Model
 
     public function details()
     {
-        return $this->hasMany(DetailTransaksiProduk::class, 'ID_TRANSAKSI_PENJUALAN_PRODUK');
+        return $this->hasMany(DetailTransaksiProduk::class, 'ID_TRANSAKSI_PENJUALAN_PRODUK', 'ID_TRANSAKSI_PENJUALAN_PRODUK');
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'ID_CUSTOMER', 'ID_CUSTOMER');
+    }
+
+    public function pegawai_cs() {
+        return $this->belongsTo(Pegawai::class, 'ID_PEGAWAI', 'ID_PEGAWAI');
+    }
+
+    public function pegawai_kasir() {
+        return $this->belongsTo(Pegawai::class, 'PEG_ID_PEGAWAI', 'ID_PEGAWAI');
+    }
+
+
 }

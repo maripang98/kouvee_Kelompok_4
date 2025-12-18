@@ -17,13 +17,13 @@ class LayananController extends Controller
             $query->where('NAMA_LAYANAN', 'like', "%{$search}%");
         })->get();
 
-        return view('layanan.index', compact('layanans'));
+        return view('owner.layanan.index', compact('layanans'));
     }
 
 
     public function create()
     {
-        return view('layanan.create');
+        return view('owner.layanan.create');
     }
 
     public function store(Request $request)
@@ -48,12 +48,12 @@ class LayananController extends Controller
         'GAMBAR_LAYANAN' => $path, // simpan path file ke database
     ]);
 
-    return redirect()->route('layanan.index')->with('success', 'Layanan berhasil ditambahkan!');
+    return redirect()->route('owner.layanan.index')->with('success', 'Layanan berhasil ditambahkan!');
     }
 
     public function edit(Layanan $layanan)
     {
-        return view('layanan.edit', compact('layanan'));
+        return view('owner.layanan.edit', compact('layanan'));
     }
 
    public function update(Request $request, Layanan $layanan)
@@ -73,32 +73,46 @@ class LayananController extends Controller
 
         $layanan->update($data);
 
-        return redirect()->route('layanan.index')->with('success', 'Layanan berhasil diperbarui.');
+        return redirect()->route('owner.layanan.index')->with('success', 'Layanan berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         $layanan = Layanan::findOrFail($id);
         $layanan->delete(); // hanya menandai deleted_at, tidak menghapus di database
-        return redirect()->route('layanan.index')->with('success', 'Layanan diarsipkan.');
+        return redirect()->route('owner.layanan.index')->with('success', 'Layanan diarsipkan.');
     }
     
 
     public function katalog(Request $request)
     {
         $search = $request->input('search');
+        $sort = $request->input('sort'); 
 
-        $layanans = Layanan::when($search, function ($query, $search) {
-            $query->where('NAMA_LAYANAN', 'like', "%{$search}%");
-        })->latest('ID_LAYANAN')->paginate(8);
+        $layanans = \App\Models\Layanan::query()
+            ->when($search, function ($query, $search) {
+                $query->where('NAMA_LAYANAN', 'like', "%{$search}%");
+            })
+            ->when($sort, function ($query) use ($sort) {
+                if ($sort === 'harga_asc') {
+                    $query->orderBy('HARGA_LAYANAN', 'asc');
+                }
+                if ($sort === 'harga_desc') {
+                    $query->orderBy('HARGA_LAYANAN', 'desc');
+                }
+            })
+            ->latest('ID_LAYANAN')
+            ->paginate(8)
+            ->appends(request()->query()); 
 
-        return view('layanan.katalog', compact('layanans', 'search'));
+        return view('owner.layanan.katalog', compact('layanans', 'search', 'sort'));
     }
+
 
     public function show($id)
     {
         $layanan = \App\Models\Layanan::findOrFail($id);
-        return view('layanan.show', compact('layanan'));
+        return view('owner.layanan.show', compact('layanan'));
     }
 
 }

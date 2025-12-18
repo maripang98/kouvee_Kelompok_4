@@ -1,0 +1,402 @@
+/* ===== OWNER DASHBOARD PREMIUM STYLES ===== */
+
+/* Dashboard Container */
+.dashboard-container {
+    padding: 30px;
+    background: #FAF8F1;
+    min-height: calc(100vh - 70px);
+}
+
+/* Page Title */
+.dashboard-title {
+    color: #334443;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.dashboard-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #34656D, #FAEAB1);
+    border-radius: 2px;
+}
+
+/* ===== SUMMARY CARDS ===== */
+.summary-cards {
+    margin-bottom: 50px;
+}
+
+.summary-card {
+    border-radius: 25px;
+    overflow: hidden;
+    border: 2px solid #FAF8F1;
+    background: white;
+    padding: 35px 30px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    box-shadow: 0 10px 30px rgba(52, 101, 109, 0.1);
+}
+
+.summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #34656D, #FAEAB1);
+}
+
+.summary-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(52, 101, 109, 0.2);
+    border-color: #FAEAB1;
+}
+
+.summary-card-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    transition: transform 0.3s ease;
+}
+
+.summary-card:hover .summary-card-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.summary-card-icon.produk {
+    background: linear-gradient(135deg, rgba(52, 101, 109, 0.1), rgba(52, 101, 109, 0.2));
+    color: #34656D;
+}
+
+.summary-card-icon.layanan {
+    background: linear-gradient(135deg, rgba(250, 234, 177, 0.3), rgba(250, 234, 177, 0.5));
+    color: #34656D;
+}
+
+.summary-card-icon.pegawai {
+    background: linear-gradient(135deg, rgba(51, 68, 67, 0.1), rgba(51, 68, 67, 0.2));
+    color: #334443;
+}
+
+.summary-card-title {
+    color: #334443;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.summary-card-value {
+    color: #34656D;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.summary-card-btn {
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: 2px solid;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.summary-card-btn.produk {
+    border-color: #34656D;
+    color: #34656D;
+    background: white;
+}
+
+.summary-card-btn.produk:hover {
+    background: #34656D;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(52, 101, 109, 0.3);
+}
+
+.summary-card-btn.layanan {
+    border-color: #FAEAB1;
+    color: #34656D;
+    background: white;
+}
+
+.summary-card-btn.layanan:hover {
+    background: #FAEAB1;
+    color: #34656D;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(250, 234, 177, 0.4);
+}
+
+.summary-card-btn.pegawai {
+    border-color: #334443;
+    color: #334443;
+    background: white;
+}
+
+.summary-card-btn.pegawai:hover {
+    background: #334443;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(51, 68, 67, 0.3);
+}
+
+/* ===== DATA TABLES SECTION ===== */
+.data-tables-section {
+    margin-top: 50px;
+}
+
+.data-card {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #FAF8F1;
+    background: white;
+    padding: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(52, 101, 109, 0.1);
+    height: 100%;
+}
+
+.data-card:hover {
+    box-shadow: 0 15px 40px rgba(52, 101, 109, 0.15);
+    border-color: #FAEAB1;
+}
+
+.data-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #FAF8F1;
+}
+
+.data-card-title {
+    color: #334443;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.data-card-title-icon {
+    font-size: 1.4rem;
+}
+
+.data-card-btn {
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: 2px solid;
+}
+
+.data-card-btn.produk {
+    background: #34656D;
+    color: white;
+    border-color: #34656D;
+}
+
+.data-card-btn.produk:hover {
+    background: white;
+    color: #34656D;
+    transform: translateX(5px);
+}
+
+.data-card-btn.layanan {
+    background: #FAEAB1;
+    color: #34656D;
+    border-color: #FAEAB1;
+}
+
+.data-card-btn.layanan:hover {
+    background: white;
+    color: #34656D;
+    border-color: #FAEAB1;
+    transform: translateX(5px);
+}
+
+.data-card-btn.pegawai {
+    background: #334443;
+    color: white;
+    border-color: #334443;
+}
+
+.data-card-btn.pegawai:hover {
+    background: white;
+    color: #334443;
+    transform: translateX(5px);
+}
+
+.data-card-btn.laporan {
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    color: white;
+    border-color: transparent;
+}
+
+.data-card-btn.laporan:hover {
+    background: #FAEAB1;
+    color: #34656D;
+    transform: translateX(5px);
+}
+
+/* ===== TABLE STYLES ===== */
+.premium-table {
+    width: 100%;
+    margin: 0;
+}
+
+.premium-table thead {
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+}
+
+.premium-table thead th {
+    color:#334443;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 15px;
+    border: none;
+}
+
+.premium-table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #FAF8F1;
+}
+
+.premium-table tbody tr:hover {
+    background: rgba(250, 234, 177, 0.1);
+    transform: translateX(5px);
+}
+
+.premium-table tbody td {
+    padding: 12px 15px;
+    color: #334443;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+
+.premium-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #334443;
+    opacity: 0.6;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 20px 15px;
+    }
+
+    .dashboard-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .summary-card {
+        margin-bottom: 20px;
+    }
+
+    .summary-card-value {
+        font-size: 2.5rem;
+    }
+
+    .data-card {
+        margin-bottom: 20px;
+    }
+
+    .data-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .data-card-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .premium-table {
+        font-size: 0.85rem;
+    }
+
+    .premium-table thead th,
+    .premium-table tbody td {
+        padding: 10px 8px;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.summary-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.summary-card:nth-child(1) { animation-delay: 0.1s; }
+.summary-card:nth-child(2) { animation-delay: 0.2s; }
+.summary-card:nth-child(3) { animation-delay: 0.3s; }
+
+.data-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.data-card:nth-child(1) { animation-delay: 0.15s; }
+.data-card:nth-child(2) { animation-delay: 0.25s; }
+.data-card:nth-child(3) { animation-delay: 0.35s; }
+.data-card:nth-child(4) { animation-delay: 0.45s; }

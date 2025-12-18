@@ -1,204 +1,231 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kouvee Petshop | CS Dashboard</title>
+@extends('layout.cs')
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  @vite(['resources/css/owner.css', 'resources/js/app.js'])
-</head>
+@section('title', 'Dashboard CS')
 
-<body class="bg-light">
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/dashboard_cs.css') }}">
+<!-- Atau jika menggunakan Vite: -->
+{{-- @vite(['resources/css/cs-dashboard.css']) --}}
+@endpush
 
-  <!-- ✅ NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="{{ route('cs.dashboard') }}">Kouvee CS</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+@section('content')
 
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link {{ Request::is('cs/dashboard') ? 'active' : '' }}" href="{{ route('cs.dashboard') }}">
-              Dashboard
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<div class="cs-dashboard-container">
 
-  <!-- 🏠 MAIN CONTENT -->
-  <div class="container py-5">
-    <h1 class="fw-bold mb-4 text-center">📋 Dashboard Customer Service</h1>
+    <!-- PAGE TITLE -->
+    <h1 class="cs-dashboard-title">📊 Dashboard Customer Service</h1>
 
     <!-- SUMMARY CARDS -->
-    <div class="row g-4 mb-5">
-      <div class="col-md-6">
-        <div class="card shadow-sm border-0 text-center p-4">
-          <h5 class="fw-bold text-secondary">Total Customer</h5>
-          <h2 class="fw-bold text-primary">{{ $totalCustomer }}</h2>
-          <a href="{{ route('cs.customer.index') }}" class="btn btn-outline-primary btn-sm mt-2">
-            Kelola Customer
-          </a>
+    <div class="row g-4 cs-summary-cards">
+        
+        <!-- Total Customer -->
+        <div class="col-md-6">
+            <div class="card cs-summary-card border-0">
+                <div class="cs-icon-circle customer">
+                    👥
+                </div>
+                <div class="cs-summary-title">Total Customer</div>
+                <div class="cs-summary-value">{{ $totalCustomer }}</div>
+                <a href="{{ route('cs.customer.index') }}" class="cs-summary-btn customer">
+                    Kelola Customer
+                </a>
+            </div>
         </div>
-      </div>
 
-      <div class="col-md-6">
-        <div class="card shadow-sm border-0 text-center p-4">
-          <h5 class="fw-bold text-secondary">Total Hewan</h5>
-          <h2 class="fw-bold text-success">{{ $totalHewan }}</h2>
-          <a href="{{ route('cs.hewan.index') }}" class="btn btn-outline-success btn-sm mt-2">
-            Kelola Hewan
-          </a>
+        <!-- Total Hewan -->
+        <div class="col-md-6">
+            <div class="card cs-summary-card border-0">
+                <div class="cs-icon-circle hewan">
+                    🐾
+                </div>
+                <div class="cs-summary-title">Total Hewan</div>
+                <div class="cs-summary-value">{{ $totalHewan }}</div>
+                <a href="{{ route('cs.hewan.index') }}" class="cs-summary-btn hewan">
+                    Kelola Hewan
+                </a>
+            </div>
         </div>
-      </div>
+
     </div>
 
-    <!-- DATA TABLES -->
-    <div class="row g-4">
-      <!-- Customer -->
-      <div class="col-md-6">
-        <div class="card border-0 shadow-sm p-3">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="fw-bold mb-0">👩‍💼 Customer Terbaru</h5>
-            <a href="{{ route('cs.customer.index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
-          </div>
+    <!-- SECTION DIVIDER -->
+    <hr class="cs-section-divider">
 
-          <table class="table table-sm table-striped align-middle mb-0">
-            <thead class="table-dark">
-              <tr>
-                <th>Nama</th>
-                <th>No. Telepon</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($customers as $c)
-                <tr>
-                  <td>{{ $c->NAMA_CUSTOMER }}</td>
-                  <td>{{ $c->NOMOR_TELEPON_CUSTOMER ?? '-' }}</td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
+    <!-- DATA TABLES - Customer & Hewan -->
+    <div class="row g-4 cs-data-section">
+
+        <!-- Customer Terbaru -->
+        <div class="col-lg-6">
+            <div class="card cs-data-card border-0">
+                <div class="cs-data-card-header">
+                    <h5 class="cs-data-card-title">
+                        <span class="cs-data-card-title-icon">👥</span>
+                        <span>Customer Terbaru</span>
+                    </h5>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table cs-table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Nama Customer</th>
+                                <th>Telepon</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($customers as $c)
+                            <tr>
+                                <td><strong>{{ $c->NAMA_CUSTOMER }}</strong></td>
+                                <td>{{ $c->NOMOR_TELEPON_CUSTOMER ?? '-' }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="2" class="cs-empty-state">
+                                    <i class="bi bi-people"></i>
+                                    <div class="cs-empty-state-text">Belum ada customer</div>
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <!-- Hewan -->
-      <div class="col-md-6">
-        <div class="card border-0 shadow-sm p-3">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="fw-bold mb-0">🐾 Hewan Terbaru</h5>
-            <a href="{{ route('cs.hewan.index') }}" class="btn btn-sm btn-success">Lihat Semua</a>
-          </div>
+        <!-- Hewan Terbaru -->
+        <div class="col-lg-6">
+            <div class="card cs-data-card border-0">
+                <div class="cs-data-card-header">
+                    <h5 class="cs-data-card-title">
+                        <span class="cs-data-card-title-icon">🐾</span>
+                        <span>Hewan Terbaru</span>
+                    </h5>
+                </div>
 
-          <table class="table table-sm table-striped align-middle mb-0">
-            <thead class="table-dark">
-              <tr>
-                <th>Nama Hewan</th>
-                <th>Jenis</th>
-                <th>Pemilik</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($hewans as $h)
-                <tr>
-                  <td>{{ $h->NAMA_HEWAN }}</td>
-                  <td>{{ $h->JENIS_HEWAN }}</td>
-                  <td>{{ $h->customer->NAMA_CUSTOMER ?? '-' }}</td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
+                <div class="table-responsive">
+                    <table class="table cs-table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Nama Hewan</th>
+                                <th>Jenis</th>
+                                <th>Pemilik</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($hewans as $h)
+                            <tr>
+                                <td><strong>{{ $h->NAMA_HEWAN }}</strong></td>
+                                <td>{{ $h->JENIS_HEWAN }}</td>
+                                <td>{{ $h->customer->NAMA_CUSTOMER ?? '-' }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="cs-empty-state">
+                                    <i class="bi bi-heart"></i>
+                                    <div class="cs-empty-state-text">Belum ada hewan</div>
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
+
     </div>
 
-    <!-- DAFTAR PRODUK & LAYANAN -->
-    <div class="row g-4 mt-4">
-      <div class="col-md-6">
-        <div class="card shadow-sm border-0 p-3">
-          <h5 class="fw-bold mb-3">🧴 Daftar Produk</h5>
-          <table class="table table-sm table-striped">
-            <thead>
-              <tr>
-                <th>Nama</th>
-                <th>Harga</th>
-                <th>Stok</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($produks as $p)
-                <tr>
-                  <td>{{ $p->NAMA_PRODUK }}</td>
-                  <td>Rp {{ number_format($p->HARGA_PRODUK, 0, ',', '.') }}</td>
-                  <td>{{ $p->STOK_PRODUK }}</td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <!-- SECTION DIVIDER -->
+    <hr class="cs-section-divider">
 
-      <div class="col-md-6">
-        <div class="card shadow-sm border-0 p-3">
-          <h5 class="fw-bold mb-3">✂️ Daftar Layanan</h5>
-          <table class="table table-sm table-striped">
-            <thead>
-              <tr>
-                <th>Nama</th>
-                <th>Harga</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($layanans as $l)
-                <tr>
-                  <td>{{ $l->NAMA_LAYANAN }}</td>
-                  <td>Rp {{ number_format($l->HARGA_LAYANAN, 0, ',', '.') }}</td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
+    <!-- DATA TABLES - Produk & Layanan -->
+    <div class="row g-4 cs-data-section">
+
+        <!-- Produk -->
+        <div class="col-lg-6">
+            <div class="card cs-data-card border-0">
+                <div class="cs-data-card-header">
+                    <h5 class="cs-data-card-title">
+                        <span class="cs-data-card-title-icon">📦</span>
+                        <span>Produk Tersedia</span>
+                    </h5>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table cs-table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Nama Produk</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($produks as $p)
+                            <tr>
+                                <td><strong>{{ Str::limit($p->NAMA_PRODUK, 30) }}</strong></td>
+                                <td>Rp {{ number_format($p->HARGA_PRODUK, 0, ',', '.') }}</td>
+                                <td>
+                                    @if($p->STOK_PRODUK < 10)
+                                        <span class="cs-table-badge low-stock">{{ $p->STOK_PRODUK }}</span>
+                                    @else
+                                        <span class="cs-table-badge in-stock">{{ $p->STOK_PRODUK }}</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="cs-empty-state">
+                                    <i class="bi bi-box-seam"></i>
+                                    <div class="cs-empty-state-text">Belum ada produk</div>
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <!-- Layanan -->
+        <div class="col-lg-6">
+            <div class="card cs-data-card border-0">
+                <div class="cs-data-card-header">
+                    <h5 class="cs-data-card-title">
+                        <span class="cs-data-card-title-icon">✂️</span>
+                        <span>Layanan Tersedia</span>
+                    </h5>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table cs-table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Nama Layanan</th>
+                                <th>Harga</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($layanans as $l)
+                            <tr>
+                                <td><strong>{{ Str::limit($l->NAMA_LAYANAN, 35) }}</strong></td>
+                                <td>Rp {{ number_format($l->HARGA_LAYANAN, 0, ',', '.') }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="2" class="cs-empty-state">
+                                    <i class="bi bi-scissors"></i>
+                                    <div class="cs-empty-state-text">Belum ada layanan</div>
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- TRANSAKSI PRODUK & LAYANAN -->
-    <div class="row g-4 mt-4">
-      <div class="col-md-6">
-        <div class="card shadow-sm border-0 text-center p-4">
-          <h5 class="fw-bold text-secondary">Transaksi Penjualan Produk</h5>
-          <a href="{{ route('cs.transaksi_produk.create') }}" class="btn btn-outline-primary btn-sm mt-2">
-            + Entri Baru
-          </a>
-          <a href="{{ route('cs.transaksi_produk.index') }}" class="btn btn-primary btn-sm mt-2">
-            📋 Lihat Transaksi
-          </a>
-        </div>
-      </div>
+</div>
 
-      <div class="col-md-6">
-        <div class="card shadow-sm border-0 text-center p-4">
-          <h5 class="fw-bold text-secondary">Transaksi Penjualan Layanan</h5>
-          <a href="{{ route('cs.transaksi_layanan.create') }}" class="btn btn-outline-success btn-sm mt-2">
-            + Entri Baru
-          </a>
-          <a href="{{ route('cs.transaksi_layanan.index') }}" class="btn btn-success btn-sm mt-2">
-            📋 Lihat Transaksi
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="bg-dark text-white text-center py-3 mt-5">
-    <p class="mb-0">© 2025 Kouvee Petshop CS Dashboard</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+@endsection

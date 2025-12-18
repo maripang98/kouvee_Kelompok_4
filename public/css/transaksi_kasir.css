@@ -1,0 +1,519 @@
+/* ===== KASIR TRANSAKSI PREMIUM STYLES (SHARED) ===== */
+
+/* Page Container */
+.kasir-transaksi-container {
+    padding: 40px 30px;
+    background: #FAF8F1;
+    min-height: calc(100vh - 70px);
+}
+
+/* Page Header */
+.kasir-transaksi-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.kasir-transaksi-title {
+    color: #334443;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.kasir-transaksi-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #34656D, #FAEAB1);
+    border-radius: 2px;
+}
+
+/* Filter Section */
+.kasir-filter-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    border: 2px solid #FAF8F1;
+    box-shadow: 0 8px 25px rgba(52, 101, 109, 0.1);
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+    animation: slideDown 0.4s ease-out;
+}
+
+.kasir-filter-card:hover {
+    box-shadow: 0 12px 35px rgba(52, 101, 109, 0.15);
+    border-color: #FAEAB1;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.kasir-filter-label {
+    color: #334443;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.kasir-filter-label i {
+    color: #FAEAB1;
+}
+
+.kasir-filter-select {
+    padding: 10px 15px;
+    border: 2px solid #34656D;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #334443;
+    transition: all 0.3s ease;
+}
+
+.kasir-filter-select:focus {
+    outline: none;
+    border-color: #FAEAB1;
+    box-shadow: 0 0 0 3px rgba(250, 234, 177, 0.2);
+}
+
+.kasir-btn-filter {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: 2px solid #28a745;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.kasir-btn-filter:hover {
+    background: #20c997;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    color: white;
+}
+
+.kasir-btn-reset {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: white;
+    color: #6c757d;
+    border: 2px solid #6c757d;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.kasir-btn-reset:hover {
+    background: #6c757d;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+}
+
+/* Table Container */
+.kasir-table-container {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(52, 101, 109, 0.1);
+    border: 2px solid #FAF8F1;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.kasir-table-container:hover {
+    box-shadow: 0 15px 40px rgba(52, 101, 109, 0.15);
+    border-color: #FAEAB1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Table Styles */
+.kasir-table {
+    width: 100%;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.kasir-table thead {
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+}
+
+.kasir-table thead th {
+    color: #FAF8F1;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 18px 15px;
+    text-align: center;
+    border: none;
+    white-space: nowrap;
+}
+
+.kasir-table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #FAF8F1;
+}
+
+.kasir-table tbody tr:hover {
+    background: rgba(250, 234, 177, 0.15);
+    transform: scale(1.005);
+}
+
+.kasir-table tbody td {
+    padding: 16px 15px;
+    color: #334443;
+    font-size: 0.95rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.kasir-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Number Badge */
+.kasir-no-badge {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #FAEAB1 0%, #FFD700 100%);
+    color: #34656D;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* Kode Badge */
+.kasir-kode-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    color: #FAF8F1;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+/* Price Cell */
+.kasir-price {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #28a745;
+}
+
+/* Status Badges */
+.kasir-status-badge {
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.kasir-status-badge.lunas {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 2px solid #28a745;
+}
+
+.kasir-status-badge.belum-lunas {
+    background: rgba(220, 53, 69, 0.15);
+    color: #dc3545;
+    border: 2px solid #dc3545;
+}
+
+.kasir-status-badge.selesai {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 2px solid #28a745;
+}
+
+.kasir-status-badge.dalam-pengerjaan {
+    background: rgba(255, 193, 7, 0.15);
+    color: #ff9800;
+    border: 2px solid #ffc107;
+}
+
+.kasir-status-badge.belum-dikerjakan {
+    background: rgba(108, 117, 125, 0.15);
+    color: #6c757d;
+    border: 2px solid #6c757d;
+}
+
+/* Action Buttons */
+.kasir-btn-bayar {
+    padding: 8px 18px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: 2px solid #28a745;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.kasir-btn-bayar:hover {
+    background: #20c997;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.kasir-btn-sudah-bayar {
+    padding: 8px 18px;
+    border-radius: 10px;
+    background: #e9ecef;
+    color: #6c757d;
+    border: 2px solid #dee2e6;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Empty State */
+.kasir-empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: #334443;
+}
+
+.kasir-empty-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    opacity: 0.3;
+}
+
+.kasir-empty-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    opacity: 0.6;
+}
+
+/* Pagination */
+.kasir-pagination {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    gap: 10px;
+}
+
+.pagination .page-item .page-link {
+    border-radius: 10px;
+    border: 2px solid #34656D;
+    color: #34656D;
+    font-weight: 600;
+    padding: 10px 18px;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-item .page-link:hover {
+    background: #34656D;
+    color: #FAF8F1;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 101, 109, 0.3);
+}
+
+.pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    border-color: #34656D;
+    color: #FAF8F1;
+    box-shadow: 0 5px 15px rgba(52, 101, 109, 0.3);
+}
+
+/* Modal Styles */
+.kasir-modal .modal-content {
+    border-radius: 20px;
+    border: 2px solid #FAF8F1;
+    overflow: hidden;
+}
+
+.kasir-modal .modal-header {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 20px 30px;
+    border: none;
+}
+
+.kasir-modal .modal-title {
+    font-weight: 700;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.kasir-modal .modal-body {
+    padding: 30px;
+}
+
+.kasir-modal-label {
+    color: #334443;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.kasir-modal-value {
+    color: #28a745;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.kasir-modal-input {
+    padding: 12px 18px;
+    border: 2px solid #34656D;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.kasir-modal-input:focus {
+    outline: none;
+    border-color: #FAEAB1;
+    box-shadow: 0 0 0 3px rgba(250, 234, 177, 0.2);
+}
+
+.kasir-modal .modal-footer {
+    padding: 20px 30px;
+    border: none;
+    display: flex;
+    gap: 15px;
+}
+
+.kasir-btn-modal-cancel {
+    padding: 12px 30px;
+    border-radius: 10px;
+    background: white;
+    color: #6c757d;
+    border: 2px solid #6c757d;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.kasir-btn-modal-cancel:hover {
+    background: #6c757d;
+    color: white;
+}
+
+.kasir-btn-modal-confirm {
+    padding: 12px 30px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: 2px solid #28a745;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.kasir-btn-modal-confirm:hover {
+    background: #20c997;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* Responsive */
+.kasir-table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.kasir-table-responsive::-webkit-scrollbar {
+    height: 8px;
+}
+
+.kasir-table-responsive::-webkit-scrollbar-track {
+    background: #FAF8F1;
+    border-radius: 10px;
+}
+
+.kasir-table-responsive::-webkit-scrollbar-thumb {
+    background: #FAEAB1;
+    border-radius: 10px;
+}
+
+.kasir-table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #34656D;
+}
+
+@media (max-width: 992px) {
+    .kasir-transaksi-container {
+        padding: 30px 20px;
+    }
+
+    .kasir-transaksi-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .kasir-transaksi-title {
+        font-size: 1.6rem;
+        flex-direction: column;
+    }
+
+    .kasir-filter-card {
+        padding: 20px 15px;
+    }
+
+    .kasir-table {
+        font-size: 0.8rem;
+    }
+
+    .kasir-table thead th,
+    .kasir-table tbody td {
+        padding: 12px 8px;
+    }
+}

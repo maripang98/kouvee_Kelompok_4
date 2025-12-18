@@ -1,107 +1,191 @@
-@extends('layout.app')
+@extends('layout.cs')
 
 @section('title', 'Transaksi Produk')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/index_transaksi_produk.css') }}">
+<!-- Atau jika menggunakan Vite: -->
+{{-- @vite(['resources/css/cs-transaksi-produk.css']) --}}
+@endpush
+
 @section('content')
-<div class="container py-5">
-  <h2 class="fw-bold mb-4 text-center">🛒 Transaksi Penjualan Produk</h2>
 
-  <!-- Tombol Tambah Transaksi -->
-  <div class="text-end mb-3">
-    <a href="{{ route('cs.transaksi_produk.create') }}" class="btn btn-primary">
-      <i class="bi bi-plus-circle"></i> Tambah Transaksi
-    </a>
-  </div>
+<div class="cs-transaksi-container">
 
-  <!-- Tabel Transaksi -->
-  <div class="card shadow-sm border-0">
-    <div class="card-body p-0">
-      <table class="table table-striped table-hover align-middle mb-0">
-        <thead class="table-dark text-center">
-          <tr>
-            <th width="60">No</th>
-            <th>Kode Transaksi</th>
-            <th>Total Harga</th>
-            <th>Tanggal</th>
-            <th width="160">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          @forelse ($transaksi as $t)
-            <tr class="text-center">
-              <td>{{ $loop->iteration }}</td>
-              <td>{{ $t->KODE_TRANSAKSI_PENJUALAN_PRODUK }}</td>
-              <td>Rp {{ number_format($t->TOTAL_HARGA_PENJUALAN_PRODUK, 0, ',', '.') }}</td>
-              <td>{{ \Carbon\Carbon::parse($t->updated_at ?? $t->TGL_TRANSAKSI_PENJUALAN_PRODUK)->timezone('Asia/Jakarta')->format('d M Y H:i') }} WIB</td>
-              <td>
-                <a href="{{ route('cs.transaksi_produk.edit', $t->ID_TRANSAKSI_PENJUALAN_PRODUK) }}" class="btn btn-sm btn-warning">
-                  <i class="bi bi-pencil"></i> Edit
-                </a>
-                <button 
-                  class="btn btn-sm btn-danger" 
-                  data-bs-toggle="modal" 
-                  data-bs-target="#hapusModal{{ $t->ID_TRANSAKSI_PENJUALAN_PRODUK }}">
-                  <i class="bi bi-trash"></i> Hapus
-                </button>
-              </td>
-            </tr>
-          @empty
-            <tr>
-              <td colspan="5" class="text-center text-muted py-3">Belum ada transaksi produk.</td>
-            </tr>
-          @endforelse
-        </tbody>
-      </table>
+    <!-- PAGE HEADER -->
+    <div class="cs-transaksi-header">
+        <h2 class="cs-transaksi-title">
+            🛒 Transaksi Penjualan Produk
+        </h2>
+        <p class="cs-transaksi-subtitle">Kelola transaksi penjualan produk kepada customer</p>
     </div>
-  </div>
 
-  <!-- Pagination -->
-  <div class="mt-4">
-    <div class="d-flex justify-content-center">
-      {{ $transaksi->onEachSide(1)->links('pagination::bootstrap-5') }}
+    <!-- STATS CARD -->
+    <div class="cs-transaksi-stats">
+        <div class="cs-stat-item">
+            <div class="cs-stat-label">Total Transaksi</div>
+            <div class="cs-stat-value">{{ $transaksi->total() }}</div>
+        </div>
+        <div class="cs-stat-item">
+            <div class="cs-stat-label">Transaksi Hari Ini</div>
+            <div class="cs-stat-value">
+                {{ $transaksi->filter(function($t) {
+                    return \Carbon\Carbon::parse($t->updated_at)->isToday();
+                })->count() }}
+            </div>
+        </div>
+        <div class="cs-stat-item">
+            <div class="cs-stat-label">Total Pendapatan</div>
+            <div class="cs-stat-value">
+                Rp {{ number_format($transaksi->sum('TOTAL_HARGA_PENJUALAN_PRODUK') / 1000, 0) }}K
+            </div>
+        </div>
     </div>
-  </div>
 
-
-<!-- Modal Konfirmasi Hapus (Ditaruh di luar tabel agar tidak lag) -->
-@foreach ($transaksi as $t)
-<div class="modal fade" 
-     id="hapusModal{{ $t->ID_TRANSAKSI_PENJUALAN_PRODUK }}" 
-     tabindex="-1" 
-     aria-labelledby="hapusModalLabel{{ $t->ID_TRANSAKSI_PENJUALAN_PRODUK }}" 
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content border-0 shadow">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title fw-semibold" id="hapusModalLabel{{ $t->ID_TRANSAKSI_PENJUALAN_PRODUK }}">
-          Konfirmasi Hapus
-        </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body text-center">
-        <p class="mb-0">Apakah Anda yakin ingin menghapus transaksi 
-          <strong>{{ $t->KODE_TRANSAKSI_PENJUALAN_PRODUK }}</strong>?
-        </p>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <form action="{{ route('cs.transaksi_produk.destroy', $t->ID_TRANSAKSI_PENJUALAN_PRODUK) }}" method="POST" class="d-inline">
-          @csrf
-          @method('DELETE')
-          <button type="submit" class="btn btn-danger">Hapus</button>
-        </form>
-      </div>
+    <!-- ACTION HEADER -->
+    <div class="cs-transaksi-action-header">
+        <div class="cs-transaksi-info">
+            Menampilkan <strong>{{ $transaksi->count() }}</strong> dari <strong>{{ $transaksi->total() }}</strong> transaksi
+        </div>
+        <a href="{{ route('cs.transaksi_produk.create') }}" class="cs-transaksi-btn-add">
+            <i class="bi bi-plus-circle-fill"></i>
+            Tambah Transaksi Baru
+        </a>
     </div>
-  </div>
+
+    <!-- TABLE SECTION -->
+    <div class="cs-transaksi-table-container">
+        <div class="cs-transaksi-table-responsive">
+            <table class="cs-transaksi-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Kode Transaksi</th>
+                        <th>Customer</th>
+                        <th>Total Harga</th>
+                        <th>Tanggal & Waktu</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($transaksi as $t)
+                    <tr>
+                        <td>
+                            <div class="cs-transaksi-no-badge">
+                                {{ $loop->iteration + ($transaksi->currentPage() - 1) * $transaksi->perPage() }}
+                            </div>
+                        </td>
+                        <td>
+                            <span class="cs-transaksi-kode-badge">
+                                {{ $t->KODE_TRANSAKSI_PENJUALAN_PRODUK }}
+                            </span>
+                        </td>
+                        <td class="cs-transaksi-customer">
+                            @if($t->customer)
+                                <i class="bi bi-person-fill" style="color: #FAEAB1;"></i>
+                                {{ $t->customer->NAMA_CUSTOMER }}
+                            @else
+                                <span style="color: #999;">-</span>
+                            @endif
+                        </td>
+                        <td class="cs-transaksi-price">
+                            <span class="cs-transaksi-price-icon">💰</span>
+                            Rp {{ number_format($t->TOTAL_HARGA_PENJUALAN_PRODUK, 0, ',', '.') }}
+                        </td>
+                        <td class="cs-transaksi-date">
+                            <i class="bi bi-calendar-event"></i>
+                            {{ \Carbon\Carbon::parse($t->updated_at)->format('d M Y') }}
+                            <br>
+                            <small style="opacity: 0.7;">
+                                <i class="bi bi-clock"></i>
+                                {{ \Carbon\Carbon::parse($t->updated_at)->format('H:i') }} WIB
+                            </small>
+                        </td>
+                        <td>
+                            <div class="cs-transaksi-action-buttons">
+                                <a href="{{ route('cs.transaksi_produk.edit', $t->ID_TRANSAKSI_PENJUALAN_PRODUK) }}" 
+                                   class="cs-transaksi-btn-action cs-transaksi-btn-edit"
+                                   title="Edit transaksi">
+                                    <i class="bi bi-pencil-square"></i>
+                                    Edit
+                                </a>
+                                <button type="button"
+                                        class="cs-transaksi-btn-action cs-transaksi-btn-delete" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#deleteModal{{ $t->ID_TRANSAKSI_PENJUALAN_PRODUK }}"
+                                        title="Hapus transaksi">
+                                    <i class="bi bi-trash"></i>
+                                    Hapus
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Delete Modal -->
+                    <div class="modal fade" id="deleteModal{{ $t->ID_TRANSAKSI_PENJUALAN_PRODUK }}" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content" style="border-radius: 20px; border: 2px solid #FAF8F1;">
+                                <div class="modal-header" style="background: linear-gradient(135deg, #34656D 0%, #334443 100%); color: #FAF8F1; border-radius: 18px 18px 0 0;">
+                                    <h5 class="modal-title">
+                                        <i class="bi bi-exclamation-triangle-fill"></i>
+                                        Konfirmasi Hapus
+                                    </h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body" style="padding: 30px; text-align: center;">
+                                    <div style="font-size: 4rem; margin-bottom: 20px;">⚠️</div>
+                                    <h6 style="color: #334443; font-weight: 600; margin-bottom: 15px;">
+                                        Yakin ingin menghapus transaksi ini?
+                                    </h6>
+                                    <p style="color: #334443; opacity: 0.7; margin-bottom: 0;">
+                                        <strong>{{ $t->KODE_TRANSAKSI_PENJUALAN_PRODUK }}</strong><br>
+                                        Customer: {{ $t->customer->NAMA_CUSTOMER ?? '-' }}<br>
+                                        Total: Rp {{ number_format($t->TOTAL_HARGA_PENJUALAN_PRODUK, 0, ',', '.') }}
+                                    </p>
+                                </div>
+                                <div class="modal-footer" style="border: none; padding: 20px 30px;">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 10px; padding: 10px 25px;">
+                                        <i class="bi bi-x-circle"></i> Batal
+                                    </button>
+                                    <form action="{{ route('cs.transaksi_produk.destroy', $t->ID_TRANSAKSI_PENJUALAN_PRODUK) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" style="border-radius: 10px; padding: 10px 25px;">
+                                            <i class="bi bi-trash"></i> Ya, Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @empty
+                    <tr>
+                        <td colspan="6">
+                            <div class="cs-transaksi-empty-state">
+                                <div class="cs-transaksi-empty-icon">🛒</div>
+                                <div class="cs-transaksi-empty-text">
+                                    Belum ada transaksi penjualan produk
+                                </div>
+                                <div class="cs-transaksi-empty-subtext">
+                                    Klik tombol "Tambah Transaksi Baru" untuk membuat transaksi pertama
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- PAGINATION -->
+    @if($transaksi->hasPages())
+    <div class="cs-transaksi-pagination">
+        {{ $transaksi->appends(request()->query())->onEachSide(1)->links('pagination::bootstrap-5') }}
+    </div>
+    @endif
+
 </div>
-@endforeach
 
 @endsection
-
-@push('styles')
-<style>
-  /* Pastikan modal muncul di atas semua elemen */
-  .modal { z-index: 1055 !important; }
-  .modal-backdrop { z-index: 1050 !important; }
-</style>
-@endpush

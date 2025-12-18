@@ -1,0 +1,396 @@
+/* ===== OWNER MENU LAPORAN PREMIUM STYLES ===== */
+
+/* Page Container */
+.owner-laporan-container {
+    padding: 60px 30px;
+    background: #FAF8F1;
+    min-height: calc(100vh - 70px);
+}
+
+/* Page Header */
+.owner-laporan-header {
+    margin-bottom: 60px;
+    text-align: center;
+    animation: fadeInDown 0.6s ease-out;
+}
+
+.owner-laporan-title {
+    color: #334443;
+    font-weight: 700;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.owner-laporan-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 5px;
+    background: linear-gradient(90deg, #34656D, #FAEAB1);
+    border-radius: 3px;
+}
+
+.owner-laporan-subtitle {
+    color: #334443;
+    opacity: 0.7;
+    font-size: 1.1rem;
+    margin-top: 30px;
+    font-weight: 500;
+}
+
+/* Menu Grid */
+.owner-laporan-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Menu Card */
+.owner-laporan-card {
+    background: white;
+    border-radius: 25px;
+    padding: 40px 35px;
+    text-align: center;
+    border: 3px solid #FAF8F1;
+    box-shadow: 0 10px 30px rgba(52, 101, 109, 0.12);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Card Background Overlay */
+.owner-laporan-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+}
+
+.owner-laporan-card:hover::before {
+    opacity: 1;
+}
+
+/* Card Content */
+.owner-laporan-card-content {
+    position: relative;
+    z-index: 1;
+    transition: all 0.5s ease;
+}
+
+/* Icon */
+.owner-laporan-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: block;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 5px 15px rgba(52, 101, 109, 0.2));
+}
+
+/* Title */
+.owner-laporan-card-title {
+    color: #334443;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    transition: all 0.5s ease;
+}
+
+/* Description */
+.owner-laporan-card-desc {
+    color: #334443;
+    opacity: 0.7;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    transition: all 0.5s ease;
+    margin: 0;
+}
+
+/* Arrow Indicator */
+.owner-laporan-arrow {
+    margin-top: 15px;
+    font-size: 1.3rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.5s ease;
+    color: #FAEAB1;
+}
+
+/* Hover Effects */
+.owner-laporan-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(52, 101, 109, 0.25);
+    border-color: #FAEAB1;
+}
+
+.owner-laporan-card:hover .owner-laporan-icon {
+    transform: scale(1.15) rotate(5deg);
+}
+
+.owner-laporan-card:hover .owner-laporan-card-title {
+    color: #FAF8F1;
+    transform: translateY(-3px);
+}
+
+.owner-laporan-card:hover .owner-laporan-card-desc {
+    color: #FAEAB1;
+    opacity: 1;
+}
+
+.owner-laporan-card:hover .owner-laporan-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Card Variants with Different Colors */
+.owner-laporan-card.layanan {
+    animation: fadeInUp 0.6s ease-out;
+    animation-delay: 0.1s;
+    animation-fill-mode: both;
+}
+
+.owner-laporan-card.layanan:hover {
+    border-color: #FAEAB1;
+}
+
+.owner-laporan-card.produk {
+    animation: fadeInUp 0.6s ease-out;
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
+}
+
+.owner-laporan-card.produk:hover {
+    border-color: #34656D;
+}
+
+.owner-laporan-card.bulanan {
+    animation: fadeInUp 0.6s ease-out;
+    animation-delay: 0.3s;
+    animation-fill-mode: both;
+}
+
+.owner-laporan-card.bulanan:hover {
+    border-color: #28a745;
+}
+
+.owner-laporan-card.bulanan:hover::before {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.owner-laporan-card.tahunan {
+    animation: fadeInUp 0.6s ease-out;
+    animation-delay: 0.4s;
+    animation-fill-mode: both;
+}
+
+.owner-laporan-card.tahunan:hover {
+    border-color: #ff6b6b;
+}
+
+.owner-laporan-card.tahunan:hover::before {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.owner-laporan-card:not(:hover) {
+    animation: float 3s ease-in-out infinite;
+}
+
+.owner-laporan-card.layanan {
+    animation-delay: 0s;
+}
+
+.owner-laporan-card.produk {
+    animation-delay: 0.5s;
+}
+
+.owner-laporan-card.bulanan {
+    animation-delay: 1s;
+}
+
+.owner-laporan-card.tahunan {
+    animation-delay: 1.5s;
+}
+
+/* Entry Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Shine Effect */
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.owner-laporan-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.7s ease;
+    z-index: 1;
+}
+
+.owner-laporan-card:hover::after {
+    left: 100%;
+}
+
+/* Active State */
+.owner-laporan-card:active {
+    transform: translateY(-10px) scale(1.01);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .owner-laporan-container {
+        padding: 50px 25px;
+    }
+
+    .owner-laporan-title {
+        font-size: 2.5rem;
+    }
+
+    .owner-laporan-grid {
+        gap: 25px;
+    }
+
+    .owner-laporan-card {
+        padding: 35px 30px;
+    }
+
+    .owner-laporan-icon {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .owner-laporan-container {
+        padding: 40px 20px;
+    }
+
+    .owner-laporan-title {
+        font-size: 2rem;
+        flex-direction: column;
+    }
+
+    .owner-laporan-subtitle {
+        font-size: 1rem;
+    }
+
+    .owner-laporan-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .owner-laporan-card {
+        padding: 30px 25px;
+    }
+
+    .owner-laporan-icon {
+        font-size: 3rem;
+    }
+
+    .owner-laporan-card-title {
+        font-size: 1.2rem;
+    }
+
+    .owner-laporan-card-desc {
+        font-size: 0.9rem;
+    }
+}
+
+/* Additional Decorative Elements */
+.owner-laporan-card-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #FAEAB1 0%, #FFD700 100%);
+    color: #34656D;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+.owner-laporan-card:hover .owner-laporan-card-badge {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Loading State */
+.owner-laporan-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.owner-laporan-loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid #FAF8F1;
+    border-top-color: #34656D;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

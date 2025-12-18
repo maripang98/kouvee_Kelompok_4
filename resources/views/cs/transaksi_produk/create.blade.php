@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.cs')
 
 @section('title', 'Tambah Transaksi Produk')
 
@@ -10,6 +10,21 @@
     <div class="card-body">
       <form action="{{ route('cs.transaksi_produk.store') }}" method="POST">
         @csrf
+
+        <!-- CUSTOMER -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Customer</label>
+          <select name="id_customer" class="form-select" required>
+            <option value="">-- Pilih Customer --</option>
+
+            @foreach ($customers as $c)
+                <option value="{{ $c->ID_CUSTOMER }}">
+                    {{ $c->NAMA_CUSTOMER }} — {{ $c->NOMOR_TELEPON_CUSTOMER }}
+                </option>
+            @endforeach
+        </select>
+
+        </div>
 
         <!-- PRODUK -->
         <div class="mb-3">
@@ -30,27 +45,24 @@
                 <tr>
                   <td>
                     <select name="produk_id[]" class="form-select produkSelect" required>
-                      <option value="">-- Pilih Produk --</option>
+                      <option value="" data-harga="0" data-stok="0">-- Pilih Produk --</option>
 
                       @foreach ($produks as $p)
                         <option 
                           value="{{ $p->ID_PRODUK }}"
                           data-harga="{{ $p->HARGA_PRODUK }}"
                           data-stok="{{ $p->STOK_PRODUK }}"
-                          {{ $p->STOK_PRODUK <= 0 ? 'disabled' : '' }}
-                        >
+                          {{ $p->STOK_PRODUK <= 0 ? 'disabled' : '' }}>
                           {{ $p->NAMA_PRODUK }}
-                          (Rp {{ number_format($p->HARGA_PRODUK, 0, ',', '.') }})
-                          — Stok: {{ $p->STOK_PRODUK <= 0 ? 'Habis' : $p->STOK_PRODUK }}
+                          (Rp {{ number_format($p->HARGA_PRODUK, 0, ',', '.') }}) —
+                          Stok: {{ $p->STOK_PRODUK <= 0 ? 'Habis' : $p->STOK_PRODUK }}
                         </option>
                       @endforeach
                     </select>
                   </td>
 
                   <td>
-                    <input type="number" name="jumlah[]" 
-                      class="form-control jumlahInput"
-                      min="1" value="1" required>
+                    <input type="number" name="jumlah[]" class="form-control jumlahInput" min="1" value="1" required>
                   </td>
 
                   <td class="text-end align-middle">
@@ -58,13 +70,8 @@
                   </td>
 
                   <td class="text-center">
-                    <button type="button" class="btn btn-outline-secondary btn-sm resetRow">
-                      <i class="bi bi-arrow-clockwise"></i> Reset
-                    </button>
-
-                    <button type="button" class="btn btn-outline-danger btn-sm removeRow">
-                      <i class="bi bi-trash"></i> Hapus
-                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm resetRow">Reset</button>
+                    <button type="button" class="btn btn-outline-danger btn-sm removeRow">Hapus</button>
                   </td>
                 </tr>
               </tbody>
@@ -72,7 +79,7 @@
           </div>
 
           <button type="button" id="addRow" class="btn btn-outline-secondary btn-sm mt-2">
-            <i class="bi bi-plus-circle"></i> Tambah Produk
+            ➕ Tambah Produk
           </button>
         </div>
 
@@ -85,12 +92,8 @@
         </div>
 
         <div class="text-end mt-4">
-          <a href="{{ route('cs.transaksi_produk.index') }}" class="btn btn-secondary">
-            <i class="bi bi-arrow-left-circle"></i> Kembali
-          </a>
-          <button type="submit" class="btn btn-success">
-            <i class="bi bi-check-circle"></i> Simpan Transaksi
-          </button>
+          <a href="{{ route('cs.transaksi_produk.index') }}" class="btn btn-secondary">Kembali</a>
+          <button type="submit" class="btn btn-success">Simpan Transaksi</button>
         </div>
 
       </form>
@@ -98,27 +101,21 @@
   </div>
 </div>
 
-<!-- TOAST ERROR -->
-<div class="position-fixed top-0 end-0 p-3" style="z-index: 9999">
-  <div id="toastError" class="toast align-items-center text-white bg-danger border-0">
-    <div class="d-flex">
-      <div class="toast-body fw-bold" id="toastErrorMessage">Error!</div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-    </div>
-  </div>
 
-  <!-- TOAST WARNING -->
-  <div id="toastWarning" class="toast align-items-center text-dark bg-warning border-0 mt-2">
-    <div class="d-flex">
-      <div class="toast-body fw-bold" id="toastWarningMessage">Warning!</div>
-      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button>
-    </div>
+<!-- TOAST NOTIF -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index:9999">
+  <div id="toastError" class="toast bg-danger text-white border-0 fade">
+    <div class="toast-body fw-bold" id="toastErrorMessage"></div>
+  </div>
+  <div id="toastWarning" class="toast bg-warning border-0 fade mt-2">
+    <div class="toast-body fw-bold" id="toastWarningMessage"></div>
   </div>
 </div>
 
+
 <!-- SCRIPT -->
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 
   const tableBody = document.querySelector('#produkTable tbody');
   const addRowBtn = document.getElementById('addRow');
@@ -137,16 +134,16 @@ document.addEventListener('DOMContentLoaded', function () {
   function hitungSubtotal(row) {
     const select = row.querySelector('.produkSelect');
     const jumlah = row.querySelector('.jumlahInput');
-    const subtotalText = row.querySelector('.subtotalText');
-
     const harga = parseInt(select.selectedOptions[0]?.dataset.harga || 0);
     const qty = parseInt(jumlah.value || 0);
 
-    subtotalText.textContent = 'Rp ' + (harga * qty).toLocaleString('id-ID');
-    hitungTotalKeseluruhan();
+    row.querySelector('.subtotalText').textContent =
+      'Rp ' + (harga * qty).toLocaleString('id-ID');
+
+    hitungTotal();
   }
 
-  function hitungTotalKeseluruhan() {
+  function hitungTotal() {
     let total = 0;
     document.querySelectorAll('.subtotalText').forEach(el => {
       total += parseInt(el.textContent.replace(/[^\d]/g, '') || 0);
@@ -154,48 +151,35 @@ document.addEventListener('DOMContentLoaded', function () {
     grandTotal.textContent = 'Rp ' + total.toLocaleString('id-ID');
   }
 
-  // ➕ Tambah baris
   addRowBtn.addEventListener('click', () => {
-    const firstRow = tableBody.querySelector('tr');
-    const newRow = firstRow.cloneNode(true);
-
+    const newRow = tableBody.querySelector('tr').cloneNode(true);
     newRow.querySelectorAll('select,input').forEach(el => el.value = '');
     newRow.querySelector('.subtotalText').textContent = 'Rp 0';
-
     tableBody.appendChild(newRow);
   });
 
-  // 🔁 Reset
   tableBody.addEventListener('click', e => {
     if (e.target.closest('.resetRow')) {
       const row = e.target.closest('tr');
       row.querySelectorAll('select,input').forEach(el => el.value = '');
       row.querySelector('.subtotalText').textContent = 'Rp 0';
-      hitungTotalKeseluruhan();
+      hitungTotal();
     }
-  });
 
-  // ❌ Hapus (minimal harus 1 baris)
-  tableBody.addEventListener('click', e => {
     if (e.target.closest('.removeRow')) {
-      if (tableBody.rows.length <= 1) {
-        showError("Minimal harus ada 1 produk dalam transaksi!");
-        return;
+      if (tableBody.rows.length === 1) {
+        return showError("Minimal 1 produk!");
       }
       e.target.closest('tr').remove();
-      hitungTotalKeseluruhan();
+      hitungTotal();
     }
   });
 
-  // 🛑 Produk duplikat + stok
   tableBody.addEventListener('change', e => {
-
     if (e.target.classList.contains('produkSelect')) {
       const selected = e.target;
-      const option = selected.selectedOptions[0];
-      const stok = parseInt(option.dataset.stok || 0);
+      const stok = parseInt(selected.selectedOptions[0].dataset.stok || 0);
 
-      // Cek duplikasi
       const values = [...document.querySelectorAll('.produkSelect')].map(s => s.value);
       if (values.filter(v => v === selected.value).length > 1) {
         showError("Produk tidak boleh duplikat!");
@@ -203,53 +187,37 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      // Stok habis
       if (stok <= 0) {
         showError("Stok produk habis!");
         selected.value = "";
         return;
       }
 
-      // Stok menipis
-      if (stok > 0 && stok <= 5) {
-        showWarning("Stok hampir habis! Sisa " + stok);
+      if (stok <= 5) {
+        showWarning("Stok hampir habis (" + stok + ")");
       }
-
-      const jumlahInput = selected.closest('tr').querySelector('.jumlahInput');
-      jumlahInput.value = 1;
 
       hitungSubtotal(selected.closest('tr'));
     }
   });
 
-  // 🎯 Validasi jumlah > stok
   tableBody.addEventListener('input', e => {
     if (e.target.classList.contains('jumlahInput')) {
 
-      const jumlahInput = e.target;
-      const row = jumlahInput.closest('tr');
+      const row = e.target.closest('tr');
       const select = row.querySelector('.produkSelect');
-      const option = select.selectedOptions[0];
-
-      if (!option) return;
-
-      const stok = parseInt(option.dataset.stok || 0);
-      const qty = parseInt(jumlahInput.value);
+      const stok = parseInt(select.selectedOptions[0]?.dataset.stok || 0);
+      const qty = parseInt(e.target.value);
 
       if (qty > stok) {
-        showError(`Jumlah melebihi stok! (Stok: ${stok})`);
-        jumlahInput.value = stok;
-      }
-
-      if (qty === stok) {
-        showWarning("Anda menggunakan sisa stok terakhir!");
+        showError("Jumlah melebihi stok (" + stok + ")");
+        e.target.value = stok;
       }
 
       hitungSubtotal(row);
     }
   });
 
-  hitungTotalKeseluruhan();
 });
 </script>
 
