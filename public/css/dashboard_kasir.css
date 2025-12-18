@@ -1,0 +1,365 @@
+/* ===== KASIR DASHBOARD PREMIUM STYLES ===== */
+
+/* Page Container */
+.kasir-dashboard-container {
+    padding: 60px 30px;
+    background: #FAF8F1;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Page Header */
+.kasir-dashboard-header {
+    margin-bottom: 60px;
+    text-align: center;
+    animation: fadeInDown 0.6s ease-out;
+}
+
+.kasir-dashboard-title {
+    color: #334443;
+    font-weight: 700;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.kasir-dashboard-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 5px;
+    background: linear-gradient(90deg, #34656D, #FAEAB1);
+    border-radius: 3px;
+}
+
+.kasir-dashboard-subtitle {
+    color: #334443;
+    opacity: 0.7;
+    font-size: 1.1rem;
+    margin-top: 30px;
+    font-weight: 500;
+}
+
+/* Menu Cards Container */
+.kasir-menu-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Menu Card */
+.kasir-menu-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background: white;
+    border-radius: 30px;
+    padding: 50px 40px;
+    text-align: center;
+    border: 3px solid #FAF8F1;
+    box-shadow: 0 15px 40px rgba(52, 101, 109, 0.15);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Card Background Animation */
+.kasir-menu-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+}
+
+.kasir-menu-card:hover::before {
+    opacity: 1;
+}
+
+/* Card Content Wrapper */
+.kasir-menu-card-content {
+    position: relative;
+    z-index: 1;
+    transition: all 0.5s ease;
+}
+
+/* Icon Circle */
+.kasir-menu-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    transition: all 0.5s ease;
+    box-shadow: 0 10px 30px rgba(52, 101, 109, 0.3);
+    position: relative;
+}
+
+.kasir-menu-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid #FAEAB1;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s ease;
+}
+
+.kasir-menu-card:hover .kasir-menu-icon {
+    background: #FAEAB1;
+    transform: scale(1.15) rotate(10deg);
+    box-shadow: 0 15px 40px rgba(250, 234, 177, 0.5);
+}
+
+.kasir-menu-card:hover .kasir-menu-icon::after {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Title */
+.kasir-menu-title {
+    color: #334443;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    transition: all 0.5s ease;
+}
+
+.kasir-menu-card:hover .kasir-menu-title {
+    color: #FAF8F1;
+    transform: translateY(-5px);
+}
+
+/* Description */
+.kasir-menu-description {
+    color: #334443;
+    opacity: 0.7;
+    font-size: 1rem;
+    line-height: 1.6;
+    transition: all 0.5s ease;
+}
+
+.kasir-menu-card:hover .kasir-menu-description {
+    color: #FAEAB1;
+    opacity: 1;
+}
+
+/* Card Variants */
+.kasir-menu-card.produk {
+    animation: fadeInLeft 0.8s ease-out;
+}
+
+.kasir-menu-card.produk .kasir-menu-icon {
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+}
+
+.kasir-menu-card.produk:hover {
+    border-color: #34656D;
+    transform: translateY(-20px) scale(1.05);
+    box-shadow: 0 25px 60px rgba(52, 101, 109, 0.3);
+}
+
+.kasir-menu-card.layanan {
+    animation: fadeInRight 0.8s ease-out;
+}
+
+.kasir-menu-card.layanan .kasir-menu-icon {
+    background: linear-gradient(135deg, #FAEAB1 0%, #FFD700 100%);
+}
+
+.kasir-menu-card.layanan:hover {
+    border-color: #FAEAB1;
+    transform: translateY(-20px) scale(1.05);
+    box-shadow: 0 25px 60px rgba(250, 234, 177, 0.4);
+}
+
+.kasir-menu-card.layanan:hover::before {
+    background: linear-gradient(135deg, #FAEAB1 0%, #FFD700 100%);
+}
+
+.kasir-menu-card.layanan:hover .kasir-menu-title,
+.kasir-menu-card.layanan:hover .kasir-menu-description {
+    color: #34656D;
+}
+
+/* Arrow Indicator */
+.kasir-menu-arrow {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.5s ease;
+    color: #FAEAB1;
+}
+
+.kasir-menu-card:hover .kasir-menu-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.kasir-menu-card:not(:hover) {
+    animation: float 3s ease-in-out infinite;
+}
+
+.kasir-menu-card.produk {
+    animation-delay: 0s;
+}
+
+.kasir-menu-card.layanan {
+    animation-delay: 0.5s;
+}
+
+/* Entry Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .kasir-dashboard-title {
+        font-size: 2.5rem;
+    }
+
+    .kasir-menu-container {
+        gap: 30px;
+    }
+
+    .kasir-menu-card {
+        min-width: 280px;
+    }
+
+    .kasir-menu-icon {
+        width: 100px;
+        height: 100px;
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .kasir-dashboard-container {
+        padding: 40px 20px;
+    }
+
+    .kasir-dashboard-title {
+        font-size: 2rem;
+        flex-direction: column;
+    }
+
+    .kasir-dashboard-subtitle {
+        font-size: 1rem;
+    }
+
+    .kasir-menu-container {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .kasir-menu-card {
+        min-width: 100%;
+        padding: 40px 30px;
+    }
+
+    .kasir-menu-icon {
+        width: 90px;
+        height: 90px;
+        font-size: 45px;
+    }
+
+    .kasir-menu-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Additional Effects */
+.kasir-menu-card:active {
+    transform: translateY(-15px) scale(1.02);
+}
+
+/* Shine Effect on Hover */
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.kasir-menu-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.7s ease;
+    z-index: 1;
+}
+
+.kasir-menu-card:hover::after {
+    left: 100%;
+}

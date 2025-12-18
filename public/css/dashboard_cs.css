@@ -1,0 +1,426 @@
+/* ===== CS DASHBOARD PREMIUM STYLES ===== */
+
+/* Dashboard Container */
+.cs-dashboard-container {
+    padding: 30px;
+    background: #FAF8F1;
+    min-height: calc(100vh - 70px);
+}
+
+/* Page Title */
+.cs-dashboard-title {
+    color: #334443;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.cs-dashboard-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #34656D, #FAEAB1);
+    border-radius: 2px;
+}
+
+/* ===== SUMMARY CARDS ===== */
+.cs-summary-cards {
+    margin-bottom: 50px;
+}
+
+.cs-summary-card {
+    border-radius: 25px;
+    overflow: hidden;
+    border: 2px solid #FAF8F1;
+    background: white;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    box-shadow: 0 10px 30px rgba(52, 101, 109, 0.1);
+    height: 100%;
+}
+
+.cs-summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #34656D, #FAEAB1);
+}
+
+.cs-summary-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 60px rgba(52, 101, 109, 0.2);
+    border-color: #FAEAB1;
+}
+
+.cs-icon-circle {
+    width: 85px;
+    height: 85px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.cs-icon-circle::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid;
+    opacity: 0;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.3;
+    }
+}
+
+.cs-summary-card:hover .cs-icon-circle {
+    transform: scale(1.15) rotate(10deg);
+}
+
+.cs-icon-circle.customer {
+    background: linear-gradient(135deg, rgba(52, 101, 109, 0.15), rgba(52, 101, 109, 0.25));
+    color: #34656D;
+}
+
+.cs-icon-circle.customer::after {
+    border-color: #34656D;
+}
+
+.cs-icon-circle.hewan {
+    background: linear-gradient(135deg, rgba(250, 234, 177, 0.4), rgba(250, 234, 177, 0.6));
+    color: #34656D;
+}
+
+.cs-icon-circle.hewan::after {
+    border-color: #FAEAB1;
+}
+
+.cs-summary-title {
+    color: #334443;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.cs-summary-value {
+    color: #34656D;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cs-summary-btn {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: 2px solid;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cs-summary-btn.customer {
+    border-color: #34656D;
+    color: #34656D;
+    background: white;
+}
+
+.cs-summary-btn.customer:hover {
+    background: #34656D;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(52, 101, 109, 0.3);
+}
+
+.cs-summary-btn.hewan {
+    border-color: #FAEAB1;
+    color: #34656D;
+    background: white;
+}
+
+.cs-summary-btn.hewan:hover {
+    background: #FAEAB1;
+    color: #34656D;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(250, 234, 177, 0.4);
+}
+
+/* ===== DATA TABLES SECTION ===== */
+.cs-data-section {
+    margin-top: 50px;
+}
+
+.cs-data-card {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #FAF8F1;
+    background: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(52, 101, 109, 0.1);
+    height: 100%;
+    margin-bottom: 30px;
+}
+
+.cs-data-card:hover {
+    box-shadow: 0 15px 40px rgba(52, 101, 109, 0.15);
+    border-color: #FAEAB1;
+    transform: translateY(-5px);
+}
+
+.cs-data-card-header {
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    padding: 20px 25px;
+    border: none;
+}
+
+.cs-data-card-title {
+    color: #FAF8F1;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cs-data-card-title-icon {
+    font-size: 1.5rem;
+}
+
+/* ===== TABLE STYLES ===== */
+.cs-table {
+    width: 100%;
+    margin: 0;
+}
+
+.cs-table thead {
+    background: linear-gradient(135deg, #FAEAB1 0%, #FAF8F1 100%);
+}
+
+.cs-table thead th {
+    color: #334443;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 15px 20px;
+    border: none;
+}
+
+.cs-table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #FAF8F1;
+}
+
+.cs-table tbody tr:hover {
+    background: rgba(250, 234, 177, 0.15);
+    transform: translateX(8px);
+}
+
+.cs-table tbody td {
+    padding: 15px 20px;
+    color: #334443;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+.cs-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Empty State */
+.cs-empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: #334443;
+    opacity: 0.6;
+}
+
+.cs-empty-state i {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    display: block;
+    opacity: 0.5;
+}
+
+.cs-empty-state-text {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Table Info Badges */
+.cs-table-badge {
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.cs-table-badge.low-stock {
+    background: rgba(220, 53, 69, 0.15);
+    color: #dc3545;
+}
+
+.cs-table-badge.in-stock {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+}
+
+/* ===== SECTION SPACING ===== */
+.cs-section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #FAEAB1, transparent);
+    margin: 50px 0;
+    border: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .cs-dashboard-container {
+        padding: 20px 15px;
+    }
+
+    .cs-dashboard-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .cs-summary-value {
+        font-size: 2.8rem;
+    }
+
+    .cs-icon-circle {
+        width: 70px;
+        height: 70px;
+        font-size: 32px;
+    }
+
+    .cs-data-card {
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cs-dashboard-title {
+        font-size: 1.8rem;
+    }
+
+    .cs-summary-card {
+        margin-bottom: 20px;
+    }
+
+    .cs-summary-value {
+        font-size: 2.5rem;
+    }
+
+    .cs-table {
+        font-size: 0.85rem;
+    }
+
+    .cs-table thead th,
+    .cs-table tbody td {
+        padding: 12px 15px;
+    }
+
+    .cs-data-card-header {
+        padding: 15px 20px;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.cs-summary-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.cs-summary-card:nth-child(1) { animation-delay: 0.1s; }
+.cs-summary-card:nth-child(2) { animation-delay: 0.2s; }
+
+.cs-data-card {
+    animation: slideInRight 0.6s ease-out;
+}
+
+.cs-data-card:nth-child(1) { animation-delay: 0.1s; }
+.cs-data-card:nth-child(2) { animation-delay: 0.2s; }
+.cs-data-card:nth-child(3) { animation-delay: 0.3s; }
+.cs-data-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Loading State */
+.cs-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.cs-loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #FAF8F1;
+    border-top-color: #34656D;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

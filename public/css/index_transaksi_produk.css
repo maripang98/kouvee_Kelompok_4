@@ -1,0 +1,496 @@
+/* ===== CS TRANSAKSI PRODUK PREMIUM STYLES ===== */
+
+/* Page Container */
+.cs-transaksi-container {
+    padding: 40px 30px;
+    background: #FAF8F1;
+    min-height: calc(100vh - 70px);
+}
+
+/* Page Header */
+.cs-transaksi-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.cs-transaksi-title {
+    color: #334443;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.cs-transaksi-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #34656D, #FAEAB1);
+    border-radius: 2px;
+}
+
+.cs-transaksi-subtitle {
+    color: #334443;
+    opacity: 0.7;
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+/* Stats Card */
+.cs-transaksi-stats {
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(52, 101, 109, 0.2);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.cs-stat-item {
+    text-align: center;
+    color: #FAF8F1;
+}
+
+.cs-stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.cs-stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FAEAB1;
+}
+
+/* Action Header */
+.cs-transaksi-action-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.cs-transaksi-info {
+    color: #334443;
+    font-weight: 600;
+}
+
+.cs-transaksi-info strong {
+    color: #34656D;
+    font-size: 1.2rem;
+}
+
+.cs-transaksi-btn-add {
+    padding: 14px 30px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    color: #FAF8F1;
+    border: 2px solid #34656D;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(52, 101, 109, 0.3);
+}
+
+.cs-transaksi-btn-add:hover {
+    background: #FAEAB1;
+    color: #34656D;
+    border-color: #FAEAB1;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(250, 234, 177, 0.4);
+}
+
+.cs-transaksi-btn-add i {
+    font-size: 1.2rem;
+}
+
+/* Table Container */
+.cs-transaksi-table-container {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(52, 101, 109, 0.1);
+    border: 2px solid #FAF8F1;
+    transition: all 0.3s ease;
+}
+
+.cs-transaksi-table-container:hover {
+    box-shadow: 0 15px 40px rgba(52, 101, 109, 0.15);
+    border-color: #FAEAB1;
+}
+
+/* Table Styles */
+.cs-transaksi-table {
+    width: 100%;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.cs-transaksi-table thead {
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+}
+
+.cs-transaksi-table thead th {
+    color: #FAF8F1;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 18px 15px;
+    text-align: center;
+    border: none;
+    white-space: nowrap;
+}
+
+.cs-transaksi-table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #FAF8F1;
+}
+
+.cs-transaksi-table tbody tr:hover {
+    background: rgba(250, 234, 177, 0.15);
+    transform: scale(1.01);
+}
+
+.cs-transaksi-table tbody td {
+    padding: 16px 15px;
+    color: #334443;
+    font-size: 0.95rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.cs-transaksi-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Number Badge */
+.cs-transaksi-no-badge {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #FAEAB1 0%, #FFD700 100%);
+    color: #34656D;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* Kode Badge */
+.cs-transaksi-kode-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    color: #FAF8F1;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+/* Customer Cell */
+.cs-transaksi-customer {
+    font-weight: 600;
+    color: #34656D;
+}
+
+/* Price Cell */
+.cs-transaksi-price {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #28a745;
+}
+
+.cs-transaksi-price-icon {
+    font-size: 0.9rem;
+    margin-right: 3px;
+}
+
+/* Date Cell */
+.cs-transaksi-date {
+    color: #334443;
+    font-size: 0.9rem;
+}
+
+.cs-transaksi-date i {
+    color: #FAEAB1;
+    margin-right: 5px;
+}
+
+/* Action Buttons */
+.cs-transaksi-action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.cs-transaksi-btn-action {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: 2px solid;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cs-transaksi-btn-edit {
+    background: white;
+    color: #FAEAB1;
+    border-color: #FAEAB1;
+}
+
+.cs-transaksi-btn-edit:hover {
+    background: #FAEAB1;
+    color: #34656D;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(250, 234, 177, 0.3);
+}
+
+.cs-transaksi-btn-delete {
+    background: white;
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.cs-transaksi-btn-delete:hover {
+    background: #dc3545;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+}
+
+/* Empty State */
+.cs-transaksi-empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: #334443;
+}
+
+.cs-transaksi-empty-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    opacity: 0.3;
+}
+
+.cs-transaksi-empty-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    opacity: 0.6;
+    margin-bottom: 20px;
+}
+
+.cs-transaksi-empty-subtext {
+    font-size: 0.95rem;
+    opacity: 0.5;
+}
+
+/* Pagination */
+.cs-transaksi-pagination {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    gap: 10px;
+}
+
+.pagination .page-item .page-link {
+    border-radius: 10px;
+    border: 2px solid #34656D;
+    color: #34656D;
+    font-weight: 600;
+    padding: 10px 18px;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-item .page-link:hover {
+    background: #34656D;
+    color: #FAF8F1;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 101, 109, 0.3);
+}
+
+.pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, #34656D 0%, #334443 100%);
+    border-color: #34656D;
+    color: #FAF8F1;
+    box-shadow: 0 5px 15px rgba(52, 101, 109, 0.3);
+}
+
+.pagination .page-item.disabled .page-link {
+    border-color: #FAF8F1;
+    color: #334443;
+    opacity: 0.5;
+}
+
+/* Responsive Table Wrapper */
+.cs-transaksi-table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.cs-transaksi-table-responsive::-webkit-scrollbar {
+    height: 8px;
+}
+
+.cs-transaksi-table-responsive::-webkit-scrollbar-track {
+    background: #FAF8F1;
+    border-radius: 10px;
+}
+
+.cs-transaksi-table-responsive::-webkit-scrollbar-thumb {
+    background: #FAEAB1;
+    border-radius: 10px;
+}
+
+.cs-transaksi-table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #34656D;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .cs-transaksi-container {
+        padding: 30px 20px;
+    }
+
+    .cs-transaksi-title {
+        font-size: 2rem;
+    }
+
+    .cs-stat-value {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .cs-transaksi-title {
+        font-size: 1.6rem;
+        flex-direction: column;
+    }
+
+    .cs-transaksi-action-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cs-transaksi-btn-add {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .cs-transaksi-stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .cs-transaksi-table {
+        font-size: 0.8rem;
+    }
+
+    .cs-transaksi-table thead th,
+    .cs-transaksi-table tbody td {
+        padding: 12px 8px;
+    }
+
+    .cs-transaksi-action-buttons {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .cs-transaksi-btn-action {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Loading State */
+.cs-transaksi-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+}
+
+.cs-transaksi-loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid #FAF8F1;
+    border-top-color: #34656D;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.cs-transaksi-table-container {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.cs-transaksi-stats {
+    animation: slideIn 0.5s ease-out;
+}
+
+.cs-transaksi-action-header {
+    animation: fadeIn 0.4s ease-out;
+}
